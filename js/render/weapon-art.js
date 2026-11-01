@@ -20,6 +20,12 @@ function drawWeapon(ctx, wpn, x, y, angle, scale = 1) {
     case 'katana': drawKatana(ctx); break;
     case 'axe': drawAxe(ctx); break;
     case 'hero': drawHeroSword(ctx); break;
+    case 'dagger': drawDagger(ctx); break;
+    case 'pan': drawPan(ctx); break;
+    case 'spear': drawSpear(ctx); break;
+    case 'scythe': drawScythe(ctx); break;
+    case 'trident': drawTrident(ctx); break;
+    case 'hammer': drawHammer(ctx); break;
     default: drawPaw(ctx);
   }
 
@@ -320,6 +326,251 @@ function drawHeroSword(ctx) {
   ctx.fillStyle = '#ffd76a';
   ctx.beginPath();
   ctx.arc(-17, 0, 3.4, 0, TAU);
+  ctx.fill();
+}
+
+function drawDagger(ctx) {
+  ctx.fillStyle = '#eaf4ff';
+  ctx.strokeStyle = 'rgba(120,150,190,0.7)';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.moveTo(5, -3.6);
+  ctx.lineTo(19, -4.4);
+  ctx.lineTo(29, 0);
+  ctx.lineTo(19, 4.4);
+  ctx.lineTo(5, 3.6);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.beginPath();
+  ctx.moveTo(8, -1.4);
+  ctx.lineTo(18, -2.2);
+  ctx.lineTo(24, -0.4);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = '#8fa3c4';
+  roundRectPath(ctx, 1, -7, 4, 14, 2);
+  ctx.fill();
+
+  ctx.fillStyle = '#2e3d5c';
+  roundRectPath(ctx, -11, -2.6, 12, 5.2, 2.6);
+  ctx.fill();
+  ctx.strokeStyle = '#7f9ccc';
+  ctx.lineWidth = 1.2;
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+    ctx.moveTo(-9 + i * 3.2, -2);
+    ctx.lineTo(-7.6 + i * 3.2, 2);
+    ctx.stroke();
+  }
+}
+
+function drawPan(ctx) {
+  ctx.fillStyle = '#2c3440';
+  roundRectPath(ctx, -22, -2.8, 30, 5.6, 2.8);
+  ctx.fill();
+  ctx.strokeStyle = '#59677a';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.moveTo(-18, 0);
+  ctx.lineTo(4, 0);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(24, 0, 14, 0, TAU);
+  ctx.fillStyle = '#59636e';
+  ctx.fill();
+  ctx.strokeStyle = '#2b313a';
+  ctx.lineWidth = 2.4;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(24, 0, 9.5, 0, TAU);
+  ctx.fillStyle = '#3a424c';
+  ctx.fill();
+
+  ctx.fillStyle = 'rgba(255,255,255,0.18)';
+  ctx.beginPath();
+  ctx.arc(20, -4, 4.6, 0, TAU);
+  ctx.fill();
+
+  ctx.fillStyle = 'rgba(255,209,102,0.55)';
+  ctx.beginPath();
+  ctx.arc(30, 4, 3.2, 0, TAU);
+  ctx.fill();
+}
+
+function drawSpear(ctx) {
+  ctx.strokeStyle = '#6b4a2a';
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(-22, 0);
+  ctx.lineTo(62, 0);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#9a7146';
+  ctx.lineWidth = 1.6;
+  ctx.beginPath();
+  ctx.moveTo(-20, -1.4);
+  ctx.lineTo(60, -1.4);
+  ctx.stroke();
+
+  ctx.fillStyle = '#5c3b1e';
+  roundRectPath(ctx, -23, -4, 5, 8, 2);
+  ctx.fill();
+
+  ctx.fillStyle = '#d6e3f0';
+  ctx.strokeStyle = '#8fa6bf';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.moveTo(60, -6);
+  ctx.lineTo(78, 0);
+  ctx.lineTo(60, 6);
+  ctx.lineTo(64, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#b9cde0';
+  ctx.beginPath();
+  ctx.moveTo(59, -7.5);
+  ctx.lineTo(64, -2);
+  ctx.lineTo(59, 0);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function drawScythe(ctx) {
+  ctx.strokeStyle = '#4a3a55';
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(-22, 2);
+  ctx.lineTo(66, 2);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#7e6890';
+  ctx.lineWidth = 1.6;
+  ctx.beginPath();
+  ctx.moveTo(-20, 3);
+  ctx.lineTo(62, 3);
+  ctx.stroke();
+
+  ctx.shadowColor = 'rgba(159,240,200,0.65)';
+  ctx.shadowBlur = 10;
+  const g = ctx.createLinearGradient(40, -22, 74, 6);
+  g.addColorStop(0, '#e8fff4');
+  g.addColorStop(0.55, '#9ff0c8');
+  g.addColorStop(1, '#4f9e86');
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.moveTo(62, 4);
+  ctx.quadraticCurveTo(70, -24, 92, -20);
+  ctx.quadraticCurveTo(74, -12, 66, 3);
+  ctx.closePath();
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.75)';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.moveTo(68, -2);
+  ctx.quadraticCurveTo(76, -16, 89, -18);
+  ctx.stroke();
+
+  ctx.fillStyle = '#2f2738';
+  roundRectPath(ctx, -22, -3.4, 6, 7, 2.4);
+  ctx.fill();
+}
+
+function drawTrident(ctx) {
+  ctx.strokeStyle = '#2f5f7a';
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(-22, 0);
+  ctx.lineTo(58, 0);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#6fc9e8';
+  ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.moveTo(-20, -1.4);
+  ctx.lineTo(56, -1.4);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#c9f2ff';
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(56, -10);
+  ctx.lineTo(56, 10);
+  ctx.moveTo(64, -12);
+  ctx.lineTo(72, 0);
+  ctx.lineTo(64, 12);
+  ctx.stroke();
+
+  ctx.fillStyle = '#e8fbff';
+  ctx.beginPath();
+  ctx.moveTo(56, -6);
+  ctx.lineTo(84, 0);
+  ctx.lineTo(56, 6);
+  ctx.lineTo(52, 0);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.beginPath();
+  ctx.moveTo(60, -3);
+  ctx.lineTo(78, -0.6);
+  ctx.lineTo(60, 0);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = '#1f4055';
+  roundRectPath(ctx, -22, -3.6, 6, 7.2, 2.4);
+  ctx.fill();
+}
+
+function drawHammer(ctx) {
+  ctx.fillStyle = '#5a3f27';
+  roundRectPath(ctx, -20, -3.4, 60, 6.8, 3);
+  ctx.fill();
+  ctx.strokeStyle = '#7e5a37';
+  ctx.lineWidth = 1.2;
+  for (let i = 0; i < 5; i++) {
+    ctx.beginPath();
+    ctx.moveTo(-16 + i * 9, -2.6);
+    ctx.lineTo(-16 + i * 9, 2.6);
+    ctx.stroke();
+  }
+
+  ctx.shadowColor = 'rgba(255,179,92,0.55)';
+  ctx.shadowBlur = 12;
+  const g = ctx.createLinearGradient(38, -18, 62, 18);
+  g.addColorStop(0, '#ffe0b0');
+  g.addColorStop(0.45, '#ffb35c');
+  g.addColorStop(1, '#b96f28');
+  ctx.fillStyle = g;
+  roundRectPath(ctx, 36, -19, 28, 38, 6);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  ctx.strokeStyle = '#7a4715';
+  ctx.lineWidth = 2;
+  roundRectPath(ctx, 36, -19, 28, 38, 6);
+  ctx.stroke();
+
+  ctx.fillStyle = 'rgba(255,255,255,0.32)';
+  roundRectPath(ctx, 40, -15, 5, 30, 2.5);
+  ctx.fill();
+
+  ctx.fillStyle = '#8a5a2a';
+  roundRectPath(ctx, 32, -6, 6, 12, 3);
   ctx.fill();
 }
 

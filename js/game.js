@@ -25,6 +25,7 @@ class Game {
 
     this.player = null;
     this.monsters = [];
+    this.friends = [];
     this.weaponPickups = [];
     this.runePickups = [];
     this.unibuffs = [];
@@ -35,6 +36,9 @@ class Game {
     this.waveTimer = 15;
     this.overTimer = 0;
     this.stepT = 0;
+    this.friendTimer = null;
+    this.lastFriendType = null;
+    this.friendChoice = null;
 
     this.chosenTalent = null;
     this.talentOffered = false;
@@ -56,6 +60,10 @@ class Game {
       if (this.state === 'talent') {
         this.updateTalentSubtitle();
         this.renderTalentChoices();
+      }
+      if (this.state === 'friend') {
+        this.updateFriendTexts();
+        this.renderFriendChoices();
       }
     });
     requestAnimationFrame(this.loop);
@@ -118,6 +126,7 @@ class Game {
 
     this.player = new Player(140, GROUND_Y);
     this.monsters = [];
+    this.friends = [];
     this.weaponPickups = [];
     this.runePickups = [];
     this.unibuffs = [];
@@ -134,6 +143,9 @@ class Game {
     this.hitPause = 0;
     this.waveTimer = (DATA && DATA.world && DATA.world.waves && DATA.world.waves.startDelay) || 15;
     this.overTimer = 0;
+    this.friendTimer = null;
+    this.lastFriendType = null;
+    this.friendChoice = null;
 
     this.chosenTalent = null;
     this.talentOffered = false;
@@ -291,6 +303,11 @@ class Game {
 
     if (this.state === 'talent') return;
 
+    if (this.state === 'friend') {
+      if (this.input.pressed('pause')) this.closeFriendChoice(false);
+      return;
+    }
+
     if (this.state === 'playing' && this.input.pressed('pause')) {
       this.setPaused(true);
       return;
@@ -314,6 +331,7 @@ class Game {
     this.player.update(dt, this);
 
     for (const monster of this.monsters) monster.update(dt, this);
+    for (const friend of this.friends) friend.update(dt, this);
 
     this.updateCamera(dt);
     WORLD.cull(this.camera.x);
@@ -325,6 +343,8 @@ class Game {
       if (m.x < this.camera.x - 1700) return false;
       return true;
     });
+
+    this.friends = this.friends.filter((f) => !f.removed && f.x > this.camera.x - 1500);
 
     for (const pickup of this.weaponPickups) pickup.update(dt);
     for (const pickup of this.runePickups) pickup.update(dt);
@@ -345,6 +365,7 @@ class Game {
 
     this.updateAmbient(dt);
     this.updateWaves(dt);
+    this.updateFriends(dt);
 
     this.flash = Math.max(0, this.flash - dt * 2.1);
     if (this.talentPopup) {
@@ -515,6 +536,197 @@ class Game {
     }
   }
 
+  /* ---------- дружелюбные персонажи ---------- */
+
+  updateFriends(dt) {
+    const cfg = (DATA && DATA.friends) ? DATA.friends : null;
+    if (!cfg || !cfg.types) return;
+    if (!this.friends) this.friends = [];
+
+    this.friends = this.friends.filter((f) => !f.removed && f.x > this.camera.x - 1500);
+
+    const minKills = cfg.minKills != null ? cfg.minKills : 15;
+    if (this.kills < minKills || this.state !== 'playing') {
+      if (this.kills < minKills) this.friendTimer = null;
+      return;
+    }
+
+    if (this.friendTimer == null) {
+      const firstMin = cfg.firstDelayMin != null ? cfg.firstDelayMin : 20;
+      const firstMax = cfg.firstDelayMax != null ? cfg.firstDelayMax : 45;
+      this.friendTimer = rand(firstMin, firstMax);
+    }
+
+    this.friendTimer -= dt;
+    if (this.friendTimer > 0) return;
+
+    const maxActive = cfg.maxActive != null ? cfg.maxActive : 1;
+    if (this.friends.length >= maxActive) {
+      this.friendTimer = 8;
+      return;
+    }
+
+    this.spawnFriend();
+    this.friendTimer = rand(
+      cfg.delayMin != null ? cfg.delayMin : 40,
+      cfg.delayMax != null ? cfg.delayMax : 95
+    );
+  }
+
+  spawnFriend(typeKey) {
+    const cfg = (DATA && DATA.friends) ? DATA.friends : null;
+    if (!cfg || !cfg.types) return null;
+
+    const types = cfg.types;
+    let key = typeKey;
+    if (!key) {
+      const keys = Object.keys(types).filter((k) => k !== this.lastFriendType);
+      const pool = keys.length ? keys : Object.keys(types);
+      key = pickFrom(Math.random, pool);
+    }
+    const type = types[key];
+    if (!type) return null;
+
+    const dir = this.player.facing || 1;
+    let x = null;
+    for (let i = 0; i < 10 && x == null; i++) {
+      const target = this.player.cx() + dir * rand(480, 720);
+      x = WORLD.findGroundNear(target, 900);
+    }
+    if (x == null) x = WORLD.findGroundNear(this.player.cx() + 520, 1200);
+    if (x == null) return null;
+
+    const friend = new Friend(type, x, GROUND_Y);
+    this.friends.push(friend);
+    this.lastFriendType = key;
+
+    this.addDamageText(x, GROUND_Y - 152, friendName(type), type.accent, 1.15);
+    this.spawnBurst(x, GROUND_Y - 58, type.accent, 20);
+    Sfx.hello();
+    return friend;
+  }
+
+  talkToFriend(friend) {
+    if (!friend || friend.removed || friend.dismissT > 0) return;
+    if (this.state !== 'playing') return;
+
+    if (friend.type.effect === 'choice') {
+      this.openFriendChoice(friend);
+      return;
+    }
+
+    this.applyFriendEffect(friend);
+  }
+
+  applyFriendEffect(friend) {
+    const effectCfg = (DATA && DATA.effects) ? DATA.effects[friend.type.buff] : null;
+    if (!effectCfg) return;
+
+    const player = this.player;
+    player.addEffect(friend.type.buff, effectCfg);
+
+    const seconds = Math.round(effectCfg.duration != null ? effectCfg.duration : 10);
+    this.addDamageText(
+      friend.x,
+      friend.y - friend.visualHeight() - 10,
+      tr('friend.effectGain', { name: effectName(effectCfg), n: seconds }),
+      effectCfg.color,
+      1.1
+    );
+    this.spawnBurst(friend.x, friend.y - friend.visualHeight() * 0.5, effectCfg.color, 32);
+    this.spawnBurst(friend.x, friend.y - friend.visualHeight() * 0.5, friend.type.accent, 14);
+    this.camera.shake = Math.max(this.camera.shake, 8);
+    friend.dismiss(this);
+    Sfx.buff();
+  }
+
+  openFriendChoice(friend) {
+    this.friendChoice = { friend };
+    this.state = 'friend';
+    this.updateFriendTexts();
+    this.renderFriendChoices();
+    this.showOverlay('friend');
+    Sfx.click();
+  }
+
+  updateFriendTexts() {
+    if (!this.friendChoice) return;
+    const type = this.friendChoice.friend.type;
+    const title = document.getElementById('friend-title');
+    if (title) title.textContent = friendName(type);
+    const subtitle = document.getElementById('friend-subtitle');
+    if (subtitle) subtitle.textContent = friendGreeting(type) || '';
+  }
+
+  renderFriendChoices() {
+    const container = document.getElementById('friend-options');
+    if (!container || !this.friendChoice) return;
+    container.innerHTML = '';
+
+    const type = this.friendChoice.friend.type;
+    for (const option of (type.options || [])) {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'talent-card';
+
+      const icon = document.createElement('span');
+      icon.className = 'talent-card__icon';
+      icon.textContent = option.icon || '★';
+
+      const name = document.createElement('strong');
+      name.textContent = friendOptionName(option);
+
+      const description = document.createElement('span');
+      description.className = 'talent-card__desc';
+      description.textContent = friendOptionDescription(option);
+
+      const pick = document.createElement('span');
+      pick.className = 'talent-card__pick';
+      pick.textContent = tr('talent.pick');
+
+      card.appendChild(icon);
+      card.appendChild(name);
+      card.appendChild(description);
+      card.appendChild(pick);
+      card.addEventListener('click', () => this.chooseFriendOption(option));
+      container.appendChild(card);
+    }
+  }
+
+  chooseFriendOption(option) {
+    if (!this.friendChoice || !option) return;
+    const friend = this.friendChoice.friend;
+    const player = this.player;
+
+    if (option.stat === 'hp') player.addMaxHp(option.amount);
+    else if (option.stat === 'damage') player.addFlatDamage(option.amount);
+    else if (option.stat === 'speed') player.addFlatSpeed(option.amount);
+    player.gifts.push(option);
+
+    this.addDamageText(
+      friend.x,
+      friend.y - friend.visualHeight() - 10,
+      friendOptionName(option),
+      friend.type.accent,
+      1.12
+    );
+    this.spawnBurst(friend.x, friend.y - friend.visualHeight() * 0.5, friend.type.accent, 36);
+    friend.dismiss(this);
+    Sfx.buff();
+
+    this.closeFriendChoice(true);
+  }
+
+  closeFriendChoice(applied) {
+    this.friendChoice = null;
+    this.state = 'playing';
+    this.showOverlay(null);
+    if (this.player) {
+      this.player.invuln = Math.max(this.player.invuln, applied ? 0.8 : 0.2);
+      this.player.nearFriend = null;
+    }
+  }
+
   separateMonsters() {
     const list = this.monsters;
     for (let i = 0; i < list.length; i++) {
@@ -648,6 +860,7 @@ class Game {
     for (const pickup of this.weaponPickups) pickup.draw(ctx, this);
     for (const buff of this.unibuffs) buff.draw(ctx);
     for (const monster of this.monsters) monster.draw(ctx, this);
+    for (const friend of this.friends) friend.draw(ctx, this);
     this.player.draw(ctx, this);
 
     for (const particle of this.particles) particle.draw(ctx);

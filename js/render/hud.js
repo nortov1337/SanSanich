@@ -11,6 +11,7 @@ Render.hud = function (ctx, game) {
   drawHealth(ctx, game, p);
   drawStats(ctx, p);
   drawBuffs(ctx, p);
+  drawEffects(ctx, p);
   drawKills(ctx, game);
   drawDepth(ctx, game);
   drawTalentPopup(ctx, game);
@@ -200,6 +201,85 @@ function drawBuffs(ctx, p) {
   });
 }
 
+function drawEffects(ctx, p) {
+  const gifts = (p.gifts || []).map((gift) => ({
+    icon: gift.icon || '★',
+    name: friendOptionName(gift),
+    color: '#7dffb0',
+    infinite: true,
+    ratio: 1
+  }));
+
+  const timed = p.activeEffects().map((effect) => ({
+    icon: (effect.cfg && effect.cfg.icon) || '★',
+    name: effectName(effect.cfg),
+    color: (effect.cfg && effect.cfg.color) || '#7dd3ff',
+    time: effect.time,
+    ratio: clamp(effect.time / (effect.total || 1), 0, 1)
+  }));
+
+  const rows = gifts.concat(timed);
+  if (!rows.length) return;
+
+  const x = 22;
+  const y = 234;
+  const w = 336;
+  const rowH = 32;
+  hudPanel(ctx, x, y, w, 20 + rows.length * rowH);
+
+  ctx.textAlign = 'left';
+  ctx.font = '700 9px "Trebuchet MS", sans-serif';
+  ctx.fillStyle = 'rgba(214,198,240,0.65)';
+  ctx.fillText(tr('hud.effects'), x + 16, y + 15);
+
+  rows.forEach((row, i) => {
+    const color = row.color;
+    const ry = y + 22 + i * rowH;
+
+    ctx.beginPath();
+    ctx.arc(x + 26, ry + 7, 9, 0, TAU);
+    ctx.fillStyle = 'rgba(8,5,14,0.85)';
+    ctx.fill();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.4;
+    ctx.stroke();
+
+    ctx.textAlign = 'center';
+    ctx.font = '800 10px "Trebuchet MS", sans-serif';
+    ctx.fillStyle = color;
+    ctx.fillText(row.icon, x + 26, ry + 10.5);
+
+    ctx.textAlign = 'left';
+    ctx.font = '800 11px "Trebuchet MS", sans-serif';
+    ctx.fillStyle = '#f2ecff';
+    ctx.fillText(row.name, x + 44, ry + 9);
+
+    ctx.textAlign = 'right';
+    ctx.font = '800 11px "Trebuchet MS", sans-serif';
+    ctx.fillStyle = color;
+    ctx.fillText(
+      row.infinite ? '∞' : Math.ceil(row.time) + tr('hud.secondsAbbrev'),
+      x + w - 16,
+      ry + 9
+    );
+
+    const bx = x + 44;
+    const bw = w - 44 - 16;
+    roundRectPath(ctx, bx, ry + 14, bw, 4, 2);
+    ctx.fillStyle = 'rgba(255,255,255,0.1)';
+    ctx.fill();
+
+    if (row.ratio > 0.01) {
+      ctx.save();
+      roundRectPath(ctx, bx, ry + 14, bw * row.ratio, 4, 2);
+      ctx.clip();
+      ctx.fillStyle = color;
+      ctx.fillRect(bx, ry + 14, bw, 4);
+      ctx.restore();
+    }
+  });
+}
+
 function drawBuffStar(ctx, cx, cy, r) {
   const g = ctx.createLinearGradient(cx - r, cy - r, cx + r, cy + r);
   g.addColorStop(0, '#ff7fb0');
@@ -321,7 +401,7 @@ function drawWeaponCard(ctx, p) {
   ctx.fill();
   ctx.restore();
 
-  drawWeaponIcon(ctx, p.weapon, 72, y + 38, 0.95);
+  drawWeaponIcon(ctx, p.weapon, 72, y + 38, p.weapon.reach > 80 ? 0.72 : 0.95);
 
   ctx.textAlign = 'left';
   ctx.font = '800 14px "Trebuchet MS", sans-serif';

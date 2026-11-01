@@ -22,6 +22,9 @@ class Player {
     this.hp = startHp;
     this.unibuffs = 0;
     this.runes = { red: 0, delta: 0, zetel: 0 };
+    this.bonus = { maxHp: 0, damage: 0, speed: 0 };
+    this.gifts = [];
+    this.effects = {};
     this.weapon = makeWeapon('fist', 0);
     this.attackT = 0;
     this.attackDur = 0.24;
@@ -33,6 +36,7 @@ class Player {
     this.dead = false;
     this.deathRot = 0;
     this.nearPickup = null;
+    this.nearFriend = null;
     this.lastSafe = { x, y: this.y };
   }
 
@@ -52,7 +56,8 @@ class Player {
     const cap = DATA && DATA.player && DATA.player.maxMoveSpeedMultiplier != null
       ? DATA.player.maxMoveSpeedMultiplier
       : 2.5;
-    return RUN_SPEED * Math.min(cap, fromBuffs * fromRed);
+    const base = RUN_SPEED * Math.min(cap, fromBuffs * fromRed) + this.bonus.speed;
+    return base * this.effectMultiplier('moveSpeedMultiplier');
   }
 
   attackSpeedMultiplier() {
@@ -68,8 +73,12 @@ class Player {
   }
 
   attackInterval() {
-    const spd = this.attackSpeedMultiplier();
+    const spd = this.attackCooldownMultiplier();
     return Math.max(this.weapon.duration * spd + 0.02, this.weapon.cd * spd);
+  }
+
+  attackCooldownMultiplier() {
+    return this.attackSpeedMultiplier() / this.effectMultiplier('attackSpeedMultiplier');
   }
 
   attackRate() {
@@ -84,7 +93,56 @@ class Player {
   }
 
   effectiveDamage() {
-    return Math.max(1, Math.round(this.weapon.dmg * this.damageMultiplier()));
+    const base = this.weapon.dmg * this.damageMultiplier() + this.bonus.damage;
+    return Math.max(1, Math.round(base * this.effectMultiplier('damageMultiplier')));
+  }
+
+  /* ---------- временные эффекты друзей ---------- */
+
+  effectMultiplier(key) {
+    let mult = 1;
+    for (const id of Object.keys(this.effects)) {
+      const cfg = this.effects[id].cfg;
+      if (cfg && cfg[key]) mult *= cfg[key];
+    }
+    return mult;
+  }
+
+  activeEffects() {
+    return Object.keys(this.effects)
+      .map((id) => this.effects[id])
+      .sort((a, b) => a.time - b.time);
+  }
+
+  addEffect(id, cfg) {
+    if (!cfg) return;
+    const duration = cfg.duration != null ? cfg.duration : 10;
+    this.effects[id] = { id, cfg, time: duration, total: duration };
+    if (cfg.healToFull) this.hp = this.maxHp;
+  }
+
+  updateEffects(dt) {
+    for (const id of Object.keys(this.effects)) {
+      const effect = this.effects[id];
+      effect.time -= dt;
+      if (effect.time <= 0) delete this.effects[id];
+    }
+  }
+
+  addMaxHp(amount) {
+    const value = Math.round(amount);
+    if (!value) return;
+    this.bonus.maxHp += value;
+    this.maxHp += value;
+    this.hp = Math.min(this.maxHp, this.hp + value);
+  }
+
+  addFlatDamage(amount) {
+    this.bonus.damage += Math.round(amount);
+  }
+
+  addFlatSpeed(amount) {
+    this.bonus.speed += Math.round(amount);
   }
 
   heal(amount) {
@@ -109,6 +167,7 @@ class Player {
     this.animTime += dt;
     this.invuln = Math.max(0, this.invuln - dt);
     this.attackCd = Math.max(0, this.attackCd - dt);
+    this.updateEffects(dt);
 
     if (this.dead) {
       this.deathRot += dt * 5;
@@ -170,7 +229,7 @@ class Player {
 
     /* удар */
     if (input.pressed('attack') && this.attackCd <= 0) {
-      const spd = this.attackSpeedMultiplier();
+      const spd = this.attackCooldownMultiplier();
       this.attackDur = this.weapon.duration * spd;
       this.attackT = this.attackDur;
       this.attackCd = Math.max(this.attackDur + 0.02, this.weapon.cd * spd);
@@ -195,7 +254,27 @@ class Player {
         }
       }
     }
-    if (this.nearPickup && input.pressed('interact')) {
+
+    /* дружелюбные персонажи: подойти и нажать E */
+    this.nearFriend = null;
+    let bestFriendDist = Infinity;
+    const friends = game.friends || [];
+    for (const friend of friends) {
+      if (friend.removed || friend.dismissT > 0) continue;
+      const dx = friend.x - this.cx();
+      const dy = friend.y - (this.y + this.h * 0.5);
+      if (Math.abs(dx) > 118 || Math.abs(dy) > 96) continue;
+      const dist = Math.hypot(dx, dy);
+      if (dist < bestFriendDist) {
+        bestFriendDist = dist;
+        this.nearFriend = friend;
+      }
+    }
+
+    if (this.nearFriend) {
+      this.nearPickup = null;
+      if (input.pressed('interact')) game.talkToFriend(this.nearFriend);
+    } else if (this.nearPickup && input.pressed('interact')) {
       game.equip(this.nearPickup);
     }
 

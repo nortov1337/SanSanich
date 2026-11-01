@@ -62,7 +62,7 @@ class WeaponPickup {
     ctx.save();
     ctx.translate(this.x, bob);
     ctx.rotate(-0.5 + Math.sin(this.t) * 0.06);
-    drawWeapon(ctx, this.wpn, -10, 0, 0, 1.25);
+    drawWeapon(ctx, this.wpn, -10, 0, 0, this.wpn.reach > 80 ? 0.98 : 1.25);
     ctx.restore();
 
     ctx.save();

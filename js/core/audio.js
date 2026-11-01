@@ -102,6 +102,15 @@ const Sfx = {
     this.tone(660, 0.16, { type: 'sine', vol: 0.09, delay: 0.08 });
     this.tone(880, 0.22, { type: 'sine', vol: 0.07, delay: 0.16 });
   },
+  hello() {
+    this.tone(520, 0.13, { type: 'sine', vol: 0.08 });
+    this.tone(700, 0.18, { type: 'sine', vol: 0.07, delay: 0.1 });
+    this.tone(880, 0.2, { type: 'sine', vol: 0.05, delay: 0.2 });
+  },
+  buff() {
+    this.tone(380, 0.18, { to: 820, type: 'triangle', vol: 0.1 });
+    this.tone(760, 0.26, { to: 1180, type: 'sine', vol: 0.08, delay: 0.1 });
+  },
   death() {
     this.tone(300, 0.45, { to: 55, type: 'sawtooth', vol: 0.14 });
     this.noise(0.4, { vol: 0.12, freq: 800, freqTo: 90 });

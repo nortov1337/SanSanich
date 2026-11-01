@@ -1,6 +1,5 @@
 {
   "heroImage": "Reference/Главный Герой.jpg",
-
   "player": {
     "maxHp": 100,
     "runSpeed": 400,
@@ -9,7 +8,6 @@
     "maxMoveSpeedMultiplier": 2.5,
     "minAttackCooldownMultiplier": 0.35
   },
-
   "unibuff": {
     "name": "UniBuff",
     "nameRu": "УниБаф",
@@ -19,7 +17,6 @@
     "moveSpeed": 0.03,
     "maxHp": 2
   },
-
   "runes": {
     "red": {
       "name": "Red",
@@ -49,10 +46,9 @@
       "color": "#ffd166",
       "hint": "double damage",
       "hintRu": "двойной урон",
-      "damageBonus": 1.0
+      "damageBonus": 1
     }
   },
-
   "talents": {
     "heal_on_kill": {
       "name": "Bloodthirst",
@@ -74,7 +70,6 @@
       "amount": 10
     }
   },
-
   "weapons": {
     "fist": {
       "id": "fist",
@@ -159,9 +154,92 @@
       "knock": 460,
       "color": "#ffd76a",
       "tier": 5
+    },
+    "dagger": {
+      "id": "dagger",
+      "name": "Dagger",
+      "nameRu": "Кинжал",
+      "tag": "small, mean, twice as fast",
+      "tagRu": "маленький, злой, вдвое быстрее",
+      "dmg": 13,
+      "reach": 46,
+      "cd": 0.2,
+      "duration": 0.16,
+      "knock": 150,
+      "color": "#d9e6ff",
+      "tier": 2
+    },
+    "pan": {
+      "id": "pan",
+      "name": "Frying Pan",
+      "nameRu": "Сковорода",
+      "tag": "dinner is served",
+      "tagRu": "ужин подан",
+      "dmg": 21,
+      "reach": 58,
+      "cd": 0.38,
+      "duration": 0.26,
+      "knock": 420,
+      "color": "#b9c2cc",
+      "tier": 2
+    },
+    "spear": {
+      "id": "spear",
+      "name": "Hunter's Spear",
+      "nameRu": "Охотничье копьё",
+      "tag": "keeps monsters at a distance",
+      "tagRu": "держит монстров на расстоянии",
+      "dmg": 27,
+      "reach": 104,
+      "cd": 0.55,
+      "duration": 0.34,
+      "knock": 300,
+      "color": "#c9a26b",
+      "tier": 3
+    },
+    "scythe": {
+      "id": "scythe",
+      "name": "Reaper's Scythe",
+      "nameRu": "Коса Жнеца",
+      "tag": "harvest season",
+      "tagRu": "сезон урожая",
+      "dmg": 40,
+      "reach": 94,
+      "cd": 0.5,
+      "duration": 0.33,
+      "knock": 380,
+      "color": "#9ff0c8",
+      "tier": 4
+    },
+    "trident": {
+      "id": "trident",
+      "name": "Sea Trident",
+      "nameRu": "Морской трезубец",
+      "tag": "straight from the deep",
+      "tagRu": "прямиком из глубины",
+      "dmg": 56,
+      "reach": 98,
+      "cd": 0.52,
+      "duration": 0.34,
+      "knock": 420,
+      "color": "#6fd8ff",
+      "tier": 5
+    },
+    "hammer": {
+      "id": "hammer",
+      "name": "Thunder Hammer",
+      "nameRu": "Громовой молот",
+      "tag": "slow. very loud",
+      "tagRu": "медленный. очень громкий",
+      "dmg": 78,
+      "reach": 84,
+      "cd": 0.85,
+      "duration": 0.46,
+      "knock": 780,
+      "color": "#ffb35c",
+      "tier": 6
     }
   },
-
   "monsters": {
     "kiss": {
       "name": "UtsyUfe",
@@ -209,7 +287,7 @@
       "hp": 66,
       "dmg": 12,
       "speed": 262,
-      "scale": 1.0,
+      "scale": 1,
       "aggro": 540,
       "reach": 68,
       "windup": 0.3,
@@ -228,11 +306,11 @@
       "hp": 78,
       "dmg": 14,
       "speed": 204,
-      "scale": 1.0,
+      "scale": 1,
       "aggro": 480,
       "reach": 72,
       "windup": 0.38,
-      "cooldown": 1.0,
+      "cooldown": 1,
       "knock": 280,
       "body": "#4f9e86",
       "belly": "#9fdcc6",
@@ -296,32 +374,579 @@
       "belly": "#e8d483",
       "leg": "#7a6826",
       "accent": "#ffe27a"
+    },
+    "petrults": {
+      "name": "American Petrults",
+      "nameRu": "Американец Петрульц",
+      "img": "petrults",
+      "image": "Reference/monsters/Американец Петрульц.jpg",
+      "hp": 42,
+      "dmg": 8,
+      "speed": 240,
+      "scale": 0.88,
+      "aggro": 490,
+      "reach": 58,
+      "windup": 0.28,
+      "cooldown": 0.78,
+      "knock": 200,
+      "body": "#4f6d9e",
+      "belly": "#a9c2e6",
+      "leg": "#35496d",
+      "accent": "#ff7a7a"
+    },
+    "chertov": {
+      "name": "American Chertov",
+      "nameRu": "Американец Чертов",
+      "img": "chertov",
+      "image": "Reference/monsters/Американец Чертов.jpg",
+      "hp": 58,
+      "dmg": 11,
+      "speed": 232,
+      "scale": 0.95,
+      "aggro": 520,
+      "reach": 66,
+      "windup": 0.32,
+      "cooldown": 0.86,
+      "knock": 240,
+      "body": "#8f3f3f",
+      "belly": "#d98a8a",
+      "leg": "#5f2929",
+      "accent": "#ff5f5f"
+    },
+    "bogdanzir": {
+      "name": "Bogdanzir",
+      "nameRu": "Богданзырь",
+      "img": "bogdanzir",
+      "image": "Reference/monsters/Богданзырь.png",
+      "hp": 120,
+      "dmg": 15,
+      "speed": 196,
+      "scale": 1.25,
+      "aggro": 580,
+      "reach": 84,
+      "windup": 0.46,
+      "cooldown": 1.1,
+      "knock": 360,
+      "body": "#7b6a4a",
+      "belly": "#c8b78e",
+      "leg": "#51452f",
+      "accent": "#ffd166"
+    },
+    "bogdanplyas": {
+      "name": "Bogdanplyas",
+      "nameRu": "Богданпляс",
+      "img": "bogdanplyas",
+      "image": "Reference/monsters/Богданпляс.jpg",
+      "hp": 64,
+      "dmg": 10,
+      "speed": 258,
+      "scale": 0.9,
+      "aggro": 530,
+      "reach": 62,
+      "windup": 0.26,
+      "cooldown": 0.74,
+      "knock": 210,
+      "body": "#a35fa0",
+      "belly": "#e0a9dd",
+      "leg": "#6e3a6c",
+      "accent": "#ffa3f2"
+    },
+    "garik": {
+      "name": "Garik",
+      "nameRu": "Гарик",
+      "img": "garik",
+      "image": "Reference/monsters/Гарик.jpg",
+      "hp": 74,
+      "dmg": 13,
+      "speed": 220,
+      "scale": 1,
+      "aggro": 520,
+      "reach": 68,
+      "windup": 0.32,
+      "cooldown": 0.9,
+      "knock": 260,
+      "body": "#5c7d5c",
+      "belly": "#a8c7a8",
+      "leg": "#3c553c",
+      "accent": "#b8ff9f"
+    },
+    "guitarabas": {
+      "name": "Guitarabas",
+      "nameRu": "Гитарабас",
+      "img": "guitarabas",
+      "image": "Reference/monsters/Гитарабас.png",
+      "hp": 92,
+      "dmg": 14,
+      "speed": 205,
+      "scale": 1.05,
+      "aggro": 540,
+      "reach": 74,
+      "windup": 0.36,
+      "cooldown": 0.96,
+      "knock": 280,
+      "body": "#8a5a2b",
+      "belly": "#d1a05f",
+      "leg": "#5c3a1a",
+      "accent": "#ffcf7a"
+    },
+    "glekozh": {
+      "name": "Glekozhmyshenko",
+      "nameRu": "Глэкожмышенко",
+      "img": "glekozh",
+      "image": "Reference/monsters/Глэкожмышенко.png",
+      "hp": 36,
+      "dmg": 7,
+      "speed": 268,
+      "scale": 0.8,
+      "aggro": 470,
+      "reach": 54,
+      "windup": 0.24,
+      "cooldown": 0.68,
+      "knock": 170,
+      "body": "#d98a8a",
+      "belly": "#ffc4c4",
+      "leg": "#a85757",
+      "accent": "#ff9fd0"
+    },
+    "govorpizdy": {
+      "name": "Govorpizdy",
+      "nameRu": "Говорпизды",
+      "img": "govorpizdy",
+      "image": "Reference/monsters/Говорпизды.png",
+      "hp": 88,
+      "dmg": 16,
+      "speed": 210,
+      "scale": 1.02,
+      "aggro": 540,
+      "reach": 72,
+      "windup": 0.34,
+      "cooldown": 0.92,
+      "knock": 270,
+      "body": "#6b5f8f",
+      "belly": "#b5a9d9",
+      "leg": "#473d63",
+      "accent": "#c9b6ff"
+    },
+    "downitos": {
+      "name": "Downitos",
+      "nameRu": "Даунитос",
+      "img": "downitos",
+      "image": "Reference/monsters/Даунитос.png",
+      "hp": 54,
+      "dmg": 9,
+      "speed": 244,
+      "scale": 0.92,
+      "aggro": 510,
+      "reach": 62,
+      "windup": 0.3,
+      "cooldown": 0.8,
+      "knock": 220,
+      "body": "#5f8f7b",
+      "belly": "#a9d9c5",
+      "leg": "#3f6354",
+      "accent": "#8fffd8"
+    },
+    "zhmykh": {
+      "name": "Zhmykhzhmyshenko",
+      "nameRu": "Жмыхжмышенко",
+      "img": "zhmykh",
+      "image": "Reference/monsters/Жмыхжмышенко.png",
+      "hp": 46,
+      "dmg": 8,
+      "speed": 255,
+      "scale": 0.85,
+      "aggro": 490,
+      "reach": 58,
+      "windup": 0.27,
+      "cooldown": 0.74,
+      "knock": 195,
+      "body": "#9e7b5a",
+      "belly": "#d9bea0",
+      "leg": "#6d523a",
+      "accent": "#ffd9a8"
+    },
+    "karatist": {
+      "name": "Karatist",
+      "nameRu": "Каратист",
+      "img": "karatist",
+      "image": "Reference/monsters/Каратист.png",
+      "hp": 82,
+      "dmg": 18,
+      "speed": 236,
+      "scale": 0.98,
+      "aggro": 560,
+      "reach": 70,
+      "windup": 0.3,
+      "cooldown": 0.82,
+      "knock": 300,
+      "body": "#d9853f",
+      "belly": "#ffd0a0",
+      "leg": "#9c5c26",
+      "accent": "#ffb36b"
+    },
+    "mamosanos": {
+      "name": "Mamosanos",
+      "nameRu": "Мамосанос",
+      "img": "mamosanos",
+      "image": "Reference/monsters/Мамосанос.png",
+      "hp": 160,
+      "dmg": 20,
+      "speed": 178,
+      "scale": 1.35,
+      "aggro": 620,
+      "reach": 90,
+      "windup": 0.5,
+      "cooldown": 1.15,
+      "knock": 390,
+      "body": "#b05a7b",
+      "belly": "#e3a3bd",
+      "leg": "#7d3b54",
+      "accent": "#ff9fc4"
+    },
+    "morbidor": {
+      "name": "Morbidor",
+      "nameRu": "Морбидор",
+      "img": "morbidor",
+      "image": "Reference/monsters/Морбидор.png",
+      "hp": 140,
+      "dmg": 22,
+      "speed": 188,
+      "scale": 1.3,
+      "aggro": 600,
+      "reach": 86,
+      "windup": 0.44,
+      "cooldown": 1.05,
+      "knock": 370,
+      "body": "#4f6b5f",
+      "belly": "#9fc4b4",
+      "leg": "#34483f",
+      "accent": "#7dffcf"
+    },
+    "nunchik": {
+      "name": "Nunchik",
+      "nameRu": "Нунчик",
+      "img": "nunchik",
+      "image": "Reference/monsters/Нунчик.jpeg",
+      "hp": 70,
+      "dmg": 15,
+      "speed": 248,
+      "scale": 0.95,
+      "aggro": 550,
+      "reach": 66,
+      "windup": 0.28,
+      "cooldown": 0.8,
+      "knock": 280,
+      "body": "#7f7f3f",
+      "belly": "#c9c98a",
+      "leg": "#565627",
+      "accent": "#ffff8f"
+    },
+    "prostotup": {
+      "name": "Prostotup",
+      "nameRu": "Простотуп",
+      "img": "prostotup",
+      "image": "Reference/monsters/Простотуп.png",
+      "hp": 60,
+      "dmg": 10,
+      "speed": 230,
+      "scale": 0.94,
+      "aggro": 510,
+      "reach": 64,
+      "windup": 0.3,
+      "cooldown": 0.84,
+      "knock": 230,
+      "body": "#7a8f9e",
+      "belly": "#c0d3de",
+      "leg": "#52636d",
+      "accent": "#a9d9ff"
+    },
+    "sempelo": {
+      "name": "Sempelo",
+      "nameRu": "Семпелоу",
+      "img": "sempelo",
+      "image": "Reference/monsters/Семпелоу.png",
+      "hp": 110,
+      "dmg": 17,
+      "speed": 200,
+      "scale": 1.15,
+      "aggro": 560,
+      "reach": 82,
+      "windup": 0.4,
+      "cooldown": 1,
+      "knock": 330,
+      "body": "#a06b3f",
+      "belly": "#e0b98a",
+      "leg": "#6d4726",
+      "accent": "#ffcf8f"
+    },
+    "tuplozh": {
+      "name": "Tuplozhmyshenko",
+      "nameRu": "Тупложмышенко",
+      "img": "tuplozh",
+      "image": "Reference/monsters/Тупложмышенко.png",
+      "hp": 98,
+      "dmg": 16,
+      "speed": 214,
+      "scale": 1.1,
+      "aggro": 550,
+      "reach": 76,
+      "windup": 0.38,
+      "cooldown": 0.96,
+      "knock": 300,
+      "body": "#8f5f7a",
+      "belly": "#d9a9c0",
+      "leg": "#633f54",
+      "accent": "#ff9fd0"
+    },
+    "tupoeblo": {
+      "name": "Tupoeblo",
+      "nameRu": "Тупоебло",
+      "img": "tupoeblo",
+      "image": "Reference/monsters/Тупоебло.png",
+      "hp": 130,
+      "dmg": 19,
+      "speed": 202,
+      "scale": 1.2,
+      "aggro": 590,
+      "reach": 84,
+      "windup": 0.44,
+      "cooldown": 1.05,
+      "knock": 350,
+      "body": "#6b5f3f",
+      "belly": "#c0b48a",
+      "leg": "#474026",
+      "accent": "#ffe48f"
+    },
+    "chimas": {
+      "name": "Chimas",
+      "nameRu": "Чимас",
+      "img": "chimas",
+      "image": "Reference/monsters/Чимас.png",
+      "hp": 100,
+      "dmg": 15,
+      "speed": 222,
+      "scale": 1.08,
+      "aggro": 550,
+      "reach": 78,
+      "windup": 0.36,
+      "cooldown": 0.94,
+      "knock": 290,
+      "body": "#3f8f8f",
+      "belly": "#9fdcdc",
+      "leg": "#266363",
+      "accent": "#7dffff"
+    },
+    "shevas": {
+      "name": "Shevas",
+      "nameRu": "Шевас",
+      "img": "shevas",
+      "image": "Reference/monsters/Шевас.png",
+      "hp": 175,
+      "dmg": 24,
+      "speed": 172,
+      "scale": 1.4,
+      "aggro": 640,
+      "reach": 94,
+      "windup": 0.5,
+      "cooldown": 1.18,
+      "knock": 410,
+      "body": "#5a4f9e",
+      "belly": "#a9a0e6",
+      "leg": "#3a326d",
+      "accent": "#b6a9ff"
     }
   },
-
   "spawning": {
     "weaponUnlocks": [
-      { "id": "rusty", "minPower": 0 },
-      { "id": "blade", "minPower": 1.0 },
-      { "id": "katana", "minPower": 2.4 },
-      { "id": "axe", "minPower": 3.8 },
-      { "id": "hero", "minPower": 5.4 }
+      {
+        "id": "rusty",
+        "minPower": 0
+      },
+      {
+        "id": "blade",
+        "minPower": 1
+      },
+      {
+        "id": "dagger",
+        "minPower": 1.5
+      },
+      {
+        "id": "pan",
+        "minPower": 2
+      },
+      {
+        "id": "katana",
+        "minPower": 2.4
+      },
+      {
+        "id": "spear",
+        "minPower": 2.9
+      },
+      {
+        "id": "scythe",
+        "minPower": 3.4
+      },
+      {
+        "id": "axe",
+        "minPower": 3.8
+      },
+      {
+        "id": "trident",
+        "minPower": 4.8
+      },
+      {
+        "id": "hero",
+        "minPower": 5.4
+      },
+      {
+        "id": "hammer",
+        "minPower": 6.2
+      }
     ],
     "monsterPools": [
-      { "minPower": 0, "types": ["kiss"] },
-      { "minPower": 0.9, "types": ["kiss", "kiss", "pescheros"] },
-      { "minPower": 1.8, "types": ["kiss", "pescheros", "undefined"] },
-      { "minPower": 3.0, "types": ["pescheros", "undefined", "ucept"] },
-      { "minPower": 4.2, "types": ["undefined", "ucept", "ebalokluv"] },
-      { "minPower": 5.6, "types": ["ucept", "ebalokluv", "ogros"] },
-      { "minPower": 7.2, "types": ["ebalokluv", "ogros", "ogros", "ucept", "undefined"] },
+      {
+        "minPower": 0,
+        "types": [
+          "kiss"
+        ]
+      },
+      {
+        "minPower": 0.55,
+        "types": [
+          "kiss",
+          "kiss",
+          "glekozh",
+          "zhmykh"
+        ]
+      },
+      {
+        "minPower": 0.9,
+        "types": [
+          "kiss",
+          "kiss",
+          "pescheros"
+        ]
+      },
+      {
+        "minPower": 1.3,
+        "types": [
+          "kiss",
+          "pescheros",
+          "petrults",
+          "downitos",
+          "prostotup"
+        ]
+      },
+      {
+        "minPower": 1.8,
+        "types": [
+          "kiss",
+          "pescheros",
+          "undefined",
+          "zhmykh",
+          "petrults"
+        ]
+      },
+      {
+        "minPower": 2.4,
+        "types": [
+          "undefined",
+          "petrults",
+          "bogdanplyas",
+          "downitos",
+          "garik"
+        ]
+      },
+      {
+        "minPower": 3,
+        "types": [
+          "pescheros",
+          "undefined",
+          "ucept",
+          "nunchik",
+          "karatist",
+          "garik"
+        ]
+      },
+      {
+        "minPower": 3.6,
+        "types": [
+          "ucept",
+          "ebalokluv",
+          "guitarabas",
+          "chimas",
+          "sempelo"
+        ]
+      },
+      {
+        "minPower": 4.2,
+        "types": [
+          "undefined",
+          "ucept",
+          "ebalokluv",
+          "govorpizdy",
+          "tuplozh",
+          "chimas"
+        ]
+      },
+      {
+        "minPower": 4.8,
+        "types": [
+          "ebalokluv",
+          "ogros",
+          "bogdanzir",
+          "morbidor",
+          "tupoeblo",
+          "sempelo"
+        ]
+      },
+      {
+        "minPower": 5.6,
+        "types": [
+          "ucept",
+          "ebalokluv",
+          "ogros",
+          "mamosanos",
+          "shevas",
+          "bogdanzir",
+          "morbidor"
+        ]
+      },
+      {
+        "minPower": 7.2,
+        "types": [
+          "ebalokluv",
+          "ogros",
+          "ogros",
+          "ucept",
+          "undefined",
+          "mamosanos",
+          "shevas",
+          "tupoeblo",
+          "bogdanzir"
+        ]
+      },
       {
         "minDepth": 1000,
-        "types": ["veteran", "ogros", "ogros", "ebalokluv", "ebalokluv", "ucept", "ucept", "undefined", "undefined", "ogros", "ebalokluv", "undefined"]
+        "types": [
+          "veteran",
+          "mamosanos",
+          "shevas",
+          "ogros",
+          "ogros",
+          "ebalokluv",
+          "ebalokluv",
+          "ucept",
+          "ucept",
+          "undefined",
+          "undefined",
+          "bogdanzir",
+          "morbidor",
+          "tupoeblo"
+        ]
       }
     ]
   },
-
   "world": {
     "chunkWidth": 1500,
     "groundY": 600,
@@ -347,6 +972,116 @@
       "baseInterval": 15,
       "dangerInterval": 0.6,
       "maxMonsters": 55
+    }
+  },
+  "friends": {
+    "minKills": 15,
+    "delayMin": 65,
+    "delayMax": 140,
+    "firstDelayMin": 25,
+    "firstDelayMax": 50,
+    "maxActive": 1,
+    "types": {
+      "healer": {
+        "name": "Cat Healer",
+        "nameRu": "Кот Целитель",
+        "img": "healer",
+        "image": "Reference/good/Кот Целитель.jpg",
+        "scale": 1.05,
+        "icon": "✚",
+        "body": "#6fd8c8",
+        "belly": "#dcfff5",
+        "leg": "#3c8f85",
+        "accent": "#ffd166",
+        "effect": "choice",
+        "greeting": "The forest is harsh. Take one gift — it will last until the end of the run.",
+        "greetingRu": "Лес суров. Возьми один подарок — он останется до конца забега.",
+        "options": [
+          {
+            "id": "hp",
+            "stat": "hp",
+            "amount": 100,
+            "icon": "❤",
+            "name": "+100 max health",
+            "nameRu": "+100 к здоровью",
+            "description": "Maximum HP grows forever",
+            "descriptionRu": "Максимум здоровья растёт навсегда"
+          },
+          {
+            "id": "damage",
+            "stat": "damage",
+            "amount": 100,
+            "icon": "⚔",
+            "name": "+100 damage",
+            "nameRu": "+100 к урону",
+            "description": "Every hit deals 100 more damage",
+            "descriptionRu": "Каждый удар наносит на 100 урона больше"
+          },
+          {
+            "id": "speed",
+            "stat": "speed",
+            "amount": 100,
+            "icon": "➤",
+            "name": "+100 speed",
+            "nameRu": "+100 к скорости",
+            "description": "Movement speed grows forever",
+            "descriptionRu": "Скорость передвижения растёт навсегда"
+          }
+        ]
+      },
+      "gleko": {
+        "name": "Gleko",
+        "nameRu": "Глэко",
+        "img": "gleko",
+        "image": "Reference/good/Глэко.jpg",
+        "scale": 1.1,
+        "icon": "☀",
+        "body": "#e08a8a",
+        "belly": "#ffc4c4",
+        "leg": "#a85757",
+        "accent": "#7dd3ff",
+        "effect": "timed",
+        "buff": "confidence",
+        "greeting": "You look unsure. Hold this feeling for a while.",
+        "greetingRu": "Ты выглядишь неуверенно. Подержи это чувство немного."
+      },
+      "gavnod": {
+        "name": "Anton Gavnod",
+        "nameRu": "Антон Гавнод",
+        "img": "gavnod",
+        "image": "Reference/good/Антон Гавнод.jpg",
+        "scale": 1.12,
+        "icon": "✦",
+        "body": "#3b3550",
+        "belly": "#c9b06b",
+        "leg": "#241f33",
+        "accent": "#ffd166",
+        "effect": "timed",
+        "buff": "frenzy",
+        "greeting": "Hold the shield. Hit harder.",
+        "greetingRu": "Держи щит. Бей сильнее."
+      }
+    }
+  },
+  "effects": {
+    "confidence": {
+      "name": "Confidence",
+      "nameRu": "Уверенность",
+      "icon": "☀",
+      "color": "#7dd3ff",
+      "duration": 10,
+      "damageMultiplier": 2,
+      "attackSpeedMultiplier": 2,
+      "moveSpeedMultiplier": 2
+    },
+    "frenzy": {
+      "name": "Frenzy",
+      "nameRu": "Ярость",
+      "icon": "✦",
+      "color": "#ff9f43",
+      "duration": 30,
+      "damageMultiplier": 2,
+      "healToFull": true
     }
   }
 }

@@ -7,12 +7,14 @@
 
 const ASSET_PATHS = {
   hero: '',
-  monsters: {}
+  monsters: {},
+  friends: {}
 };
 
 const IMAGES = {
   hero: null,
   monsters: {},
+  friends: {},
   loaded: 0,
   total: 0
 };
@@ -25,6 +27,11 @@ function loadAssets(onProgress) {
   Object.keys(ASSET_PATHS.monsters).forEach((key) => {
     const path = ASSET_PATHS.monsters[key];
     if (path) jobs.push(['m:' + key, path]);
+  });
+
+  Object.keys(ASSET_PATHS.friends).forEach((key) => {
+    const path = ASSET_PATHS.friends[key];
+    if (path) jobs.push(['f:' + key, path]);
   });
 
   IMAGES.total = jobs.length;
@@ -44,6 +51,7 @@ function loadAssets(onProgress) {
     };
     img.src = encodeURI(path);
     if (key === 'hero') IMAGES.hero = img;
+    else if (key.indexOf('f:') === 0) IMAGES.friends[key.slice(2)] = img;
     else IMAGES.monsters[key.slice(2)] = img;
   })));
 }

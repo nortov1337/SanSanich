@@ -1,6 +1,6 @@
 # Syn Sanych — Path of Sani
 
-An endless 2D platformer-slasher about a cat, meme monsters, weapons, runes and UniBuff.
+An endless 2D platformer-slasher about a cat, meme monsters, friendly characters, weapons, runes and UniBuff.
 Pure HTML + CSS + JavaScript (Canvas 2D), no build step and no dependencies.
 
 **Play online:** <https://synsanych.nortov.win>
@@ -33,6 +33,8 @@ All editable data lives in a single file — **`data/game-data.json`**:
 - `talents` — talents and their effects;
 - `weapons` — every weapon;
 - `monsters` — every monster: HP, damage, speed, size, colors, images;
+- `friends` — friendly characters, their gifts, spawn threshold and rarity;
+- `effects` — timed effects (Confidence, Frenzy): duration and multipliers;
 - `spawning` — which monsters and weapons appear at which depth (`minPower` / `minDepth`). Veteran of All Greats is added to the pool with `minDepth: 1000`;
 - `world` — chunk width, ground height, stat growth with depth, monster chase speed, heart healing, talent threshold, waves;
 - `heroImage` — path to the hero photo.
@@ -52,7 +54,7 @@ The game is designed for a keyboard and mouse. If you open it on a phone or tabl
 | `A` / `D` or `←` / `→` | move |
 | `Space` / `W` / `↑` | jump (a second jump is allowed in the air) |
 | `F` | attack |
-| `E` | pick up a weapon or rune |
+| `E` | pick up a weapon or rune, talk to a friendly character |
 | `Esc` / `P` | pause |
 | `M` | sound on/off |
 | `R` | restart (on the death or pause screen) |
@@ -68,6 +70,8 @@ Always visible in the top-left corner:
 - **R / D / Z** — number of "Red", "Delta", "Zetel" runes.
 
 Health, depth in meters, zone/danger, the kill counter and the current weapon are on screen too.
+
+Active **effects** and permanent gifts are listed in a panel under UniBuff: name, icon, remaining seconds and a timer bar. Permanent gifts show `∞`.
 
 ## Talents
 
@@ -108,11 +112,25 @@ Runes lie around the map and are picked up with `E`. Each one stacks until the e
 
 ## Weapons
 
-You start with a **Fist**. Swords and blades lie along the way — pick them up with `E`.
+You start with a **Fist**. Weapons lie along the way — pick them up with `E`.
 Taking a new weapon drops the old one on the ground, so you can take it back.
 
-Types: Rusty Cleaver, Blade of Hope, Utsy's Katana, Ogros's Axe, Hero's Sword.
-Weapon power grows with depth: items drop with levels (`+N`) that increase damage and reach.
+| Weapon | Feel | Damage | Reach |
+| --- | --- | --- | --- |
+| Fist | starting paws | 10 | 44 |
+| Rusty Cleaver | found in a bush | 17 | 54 |
+| Blade of Hope | light and ringing | 25 | 60 |
+| Dagger | very fast, short | 13 | 46 |
+| Frying Pan | dinner is served | 21 | 58 |
+| Utsy's Katana | pink. very pink | 34 | 66 |
+| Hunter's Spear | keeps monsters away | 27 | 104 |
+| Reaper's Scythe | wide harvest sweeps | 40 | 94 |
+| Ogros's Axe | heavy and angry | 48 | 72 |
+| Sea Trident | straight from the deep | 56 | 98 |
+| Hero's Sword | it glows. so it must work | 62 | 80 |
+| Thunder Hammer | slow. very loud | 78 | 84 |
+
+Weapon power grows with depth: items drop with levels (`+N`) that increase damage and reach. The deeper you go, the stronger the base weapon that can drop.
 
 ## The endless forest
 
@@ -127,13 +145,57 @@ Weapon power grows with depth: items drop with levels (`+N`) that increase damag
 
 From the `Reference/monsters` folder, names strictly by file:
 
+**Early forest**
+
 - **UtsyUfe** — fast and annoying;
 - **Peshcheros** — a sturdy all-rounder;
 - **Undefined** — very quick;
+- **Glekozhmyshenko** — small and hyperactive;
+- **Zhmykhzhmyshenko** — quick and scrappy;
+- **American Petrults** — fast, hits from a distance;
+- **American Chertov** — slightly heavier cousin;
+- **Downitos** — balanced mid-tier;
+- **Prostotup** — slow-ish brawler;
+- **Bogdanplyas** — dancing into your face;
+- **Garik** — solid all-rounder.
+
+**Mid forest**
+
 - **Utseplyastszhire** — heavier and hits harder;
 - **Ebalokluv** — a big brawler;
+- **Guitarabas** — heavy hitter;
+- **Nunchik** — fast striker;
+- **Karatist** — quick and painful;
+- **Govorpizdy** — tanky talker;
+- **Chimas** — sturdy and fast;
+- **Sempelo** — heavy mid-tier;
+- **Tuplozhmyshenko** — tough and annoying.
+
+**Deep forest**
+
 - **Ogros Narepos** — late-zone mini-tank;
+- **Bogdanzir** — heavy brute;
+- **Morbidor** — big and mean;
+- **Tupoeblo** — slow, very tough;
+- **Mamosanos** — late-zone tank;
+- **Shevas** — the heaviest of the new arrivals;
 - **Veteran of All Greats** — elite crowned tank that appears from **1000 m** deep.
+
+## Friendly characters
+
+Starting from **15 kills**, friendly characters begin to appear in the forest — **rarely**, about once every 1–2 minutes, and no more than one at a time. Walk up and press `E` to talk.
+
+| Character | Gift |
+| --- | --- |
+| **Cat Healer** | Offers a choice of **+100 max health**, **+100 damage** or **+100 speed**. The gift is permanent for the rest of the run. |
+| **Gleko** | Grants **Confidence** for **10 seconds**: doubles damage, attack speed and movement speed. |
+| **Anton Gavnod** | Fully restores HP and grants **Frenzy** for **30 seconds**: doubles damage. |
+
+- The healer's choice opens a three-card screen; press `Esc` to postpone and talk again later.
+- Timed effects stack with each other and with runes/UniBuff.
+- Active effects and permanent gifts are shown in the HUD panel under UniBuff, with timers.
+- Friendly characters cannot be attacked and do not attack; they disappear after giving their gift.
+- The spawn threshold and rarity are configured in `data/game-data.json` → `friends` (`minKills`, `firstDelayMin/Max`, `delayMin/Max`, `maxActive`).
 
 ## Code structure
 
@@ -142,7 +204,7 @@ The code is split into small modules. All game data is in JSON; the code is logi
 ```
 index.html
 css/style.css
-data/game-data.json    ← monsters, weapons, runes, talents, balance
+data/game-data.json    ← monsters, weapons, friends, effects, runes, talents, balance
 server.js              local server (needed to load the JSON)
 start-game.bat         Windows launcher (Node → Python fallback)
 js/
@@ -166,6 +228,7 @@ js/
   entities/
     player.js          the cat and its stats
     monster.js         monster AI and physics
+    friend.js          friendly characters and their gifts
     pickups.js         weapons, runes, UniBuff, hearts
     effects.js         particles and floating text
   render/

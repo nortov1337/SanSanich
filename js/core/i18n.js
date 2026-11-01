@@ -14,7 +14,7 @@ const I18N = {
     'menu.key.move': 'move',
     'menu.key.jump': 'jump ×2',
     'menu.key.attack': 'attack',
-    'menu.key.pickup': 'weapons / runes',
+    'menu.key.pickup': 'weapons / runes / friends',
     'menu.start': 'START RUN',
     'menu.loadingData': 'LOADING DATA…',
     'menu.loading': 'LOADING {p}%',
@@ -60,13 +60,21 @@ const I18N = {
     'hud.attackRateSuffix': '/s',
     'hud.unibuffGain': '+{n} UNIBUFFS',
     'hud.runeGain': 'RUNE “{name}”',
+    'hud.effects': 'EFFECTS',
+    'hud.secondsAbbrev': 's',
 
     'unit.m': 'm',
 
     'prompt.pickup': 'PICK UP',
     'prompt.take': 'TAKE',
+    'prompt.talk': 'TALK',
     'pickup.runeTitle': 'RUNE “{name}”',
     'pickup.unibuffGain': '+ UNIBUFF',
+
+    'friend.title': 'CHOOSE A GIFT',
+    'friend.note': 'The gift lasts until the end of the run',
+    'friend.effectGain': '{name} · {n}s',
+    'friend.giftGain': '{name}',
 
     'sign.move': 'A / D — MOVE',
     'sign.jump': 'SPACE — JUMP ×2',
@@ -95,7 +103,7 @@ const I18N = {
     'menu.key.move': 'идти',
     'menu.key.jump': 'прыжок ×2',
     'menu.key.attack': 'удар',
-    'menu.key.pickup': 'оружие / руны',
+    'menu.key.pickup': 'оружие / руны / друзья',
     'menu.start': 'НАЧАТЬ ЗАБЕГ',
     'menu.loadingData': 'ЗАГРУЗКА ДАННЫХ…',
     'menu.loading': 'ЗАГРУЗКА {p}%',
@@ -141,13 +149,21 @@ const I18N = {
     'hud.attackRateSuffix': '/с',
     'hud.unibuffGain': '+{n} УНИБАФОВ',
     'hud.runeGain': 'РУНА «{name}»',
+    'hud.effects': 'ЭФФЕКТЫ',
+    'hud.secondsAbbrev': 'с',
 
     'unit.m': 'м',
 
     'prompt.pickup': 'ПОДОБРАТЬ',
     'prompt.take': 'ВЗЯТЬ',
+    'prompt.talk': 'ПОГОВОРИТЬ',
     'pickup.runeTitle': 'РУНА «{name}»',
     'pickup.unibuffGain': '+ УНИБАФ',
+
+    'friend.title': 'ВЫБЕРИ ПОДАРОК',
+    'friend.note': 'Подарок действует до конца забега',
+    'friend.effectGain': '{name} · {n} с',
+    'friend.giftGain': '{name}',
 
     'sign.move': 'A / D — ИДТИ',
     'sign.jump': 'SPACE — ПРЫЖОК ×2',
@@ -232,6 +248,26 @@ function unibuffName() {
     return currentLang === 'ru' ? 'УниБаф' : 'UniBuff';
   }
   return pickLocalized(UNIBUFF.name, UNIBUFF.nameRu);
+}
+
+function friendName(type) {
+  return type ? pickLocalized(type.name, type.nameRu) : '';
+}
+
+function friendGreeting(type) {
+  return type ? pickLocalized(type.greeting, type.greetingRu) : '';
+}
+
+function friendOptionName(option) {
+  return option ? pickLocalized(option.name, option.nameRu) : '';
+}
+
+function friendOptionDescription(option) {
+  return option ? pickLocalized(option.description, option.descriptionRu) : '';
+}
+
+function effectName(cfg) {
+  return cfg ? pickLocalized(cfg.name, cfg.nameRu) : '';
 }
 
 function formatMeters(value) {

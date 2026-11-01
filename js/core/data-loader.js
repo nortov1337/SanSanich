@@ -36,6 +36,13 @@ function applyGameData(data) {
       const monster = MONSTER_TYPES[key];
       if (monster.image) ASSET_PATHS.monsters[key] = monster.image;
     }
+
+    ASSET_PATHS.friends = {};
+    const friendTypes = (data.friends && data.friends.types) || {};
+    for (const key of Object.keys(friendTypes)) {
+      const friend = friendTypes[key];
+      if (friend.image) ASSET_PATHS.friends[key] = friend.image;
+    }
   }
 
   const player = data.player || {};
