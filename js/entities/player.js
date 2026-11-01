@@ -27,6 +27,7 @@ class Player {
     this.attackCd = 0;
     this.attackHit = false;
     this.invuln = 0;
+    this.immuneTextCd = 0;
     this.animTime = 0;
     this.stepTimer = 0;
     this.dead = false;
@@ -104,6 +105,14 @@ class Player {
     return mult;
   }
 
+  isInvulnerable() {
+    for (const id of Object.keys(this.effects)) {
+      const cfg = this.effects[id].cfg;
+      if (cfg && cfg.invulnerable) return true;
+    }
+    return false;
+  }
+
   activeEffects() {
     return Object.keys(this.effects)
       .map((id) => this.effects[id])
@@ -162,6 +171,7 @@ class Player {
     const input = game.input;
     this.animTime += dt;
     this.invuln = Math.max(0, this.invuln - dt);
+    this.immuneTextCd = Math.max(0, this.immuneTextCd - dt);
     this.attackCd = Math.max(0, this.attackCd - dt);
     this.updateEffects(dt);
 
@@ -401,6 +411,17 @@ class Player {
 
   takeDamage(amount, srcX, game, ignoreInvuln = false) {
     if (this.dead) return;
+
+    if (this.isInvulnerable()) {
+      this.invuln = Math.max(this.invuln, 0.3);
+      if (game && this.immuneTextCd <= 0) {
+        this.immuneTextCd = 0.9;
+        game.addDamageText(this.cx(), this.y - 4, tr('hud.immune'), '#ffd166', 1);
+        game.spawnBurst(this.cx(), this.y + this.h * 0.45, '#ffd166', 8);
+      }
+      return;
+    }
+
     if (this.invuln > 0 && !ignoreInvuln) return;
 
     const finalDamage = Math.max(1, Math.round(amount));
@@ -454,6 +475,21 @@ class Player {
     ctx.ellipse(cx, feet + 3, 31, 8.5, 0, 0, TAU);
     ctx.stroke();
     ctx.restore();
+
+    const shield = this.activeEffects().find((effect) => effect.cfg && effect.cfg.invulnerable);
+    if (shield && !this.dead) {
+      const shieldColor = shield.cfg.color || '#ffd166';
+      ctx.save();
+      ctx.globalAlpha = 0.5 + Math.sin(t * 6) * 0.18;
+      ctx.strokeStyle = shieldColor;
+      ctx.lineWidth = 2.5;
+      ctx.shadowColor = shieldColor;
+      ctx.shadowBlur = 16;
+      ctx.beginPath();
+      ctx.ellipse(cx, feet - 34, 36, 46, 0, 0, TAU);
+      ctx.stroke();
+      ctx.restore();
+    }
 
     ctx.save();
     ctx.translate(cx, feet - bob);

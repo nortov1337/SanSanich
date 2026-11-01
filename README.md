@@ -188,8 +188,8 @@ Starting from **15 kills**, friendly characters begin to appear in the forest â€
 | Character | Gift |
 | --- | --- |
 | **Cat Healer** | Offers a choice of **+100 max health**, **+100 damage** or **+100 speed**. The gift is permanent for the rest of the run. |
-| **Gleko** | Grants **Confidence** for **10 seconds**: doubles damage, attack speed and movement speed. |
-| **Anton Gavnod** | Fully restores HP and grants **Frenzy** for **30 seconds**: doubles damage. |
+| **Gleko** | Grants **Confidence** for **10 seconds**: doubles damage, attack speed and movement speed, and makes the cat invulnerable. |
+| **Anton Gavnod** | Fully restores HP and grants **Frenzy** for **30 seconds**: doubles damage and makes the cat invulnerable. |
 
 - The healer's choice opens a three-card screen; press `Esc` to postpone and talk again later.
 - Timed effects stack with each other and with runes/UniBuff.

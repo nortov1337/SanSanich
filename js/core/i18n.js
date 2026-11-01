@@ -60,6 +60,7 @@ const I18N = {
     'hud.effects': 'EFFECTS',
     'hud.secondsAbbrev': 's',
     'hud.permanent': 'FOREVER',
+    'hud.immune': 'IMMUNE',
 
     'unit.m': 'm',
 
@@ -154,6 +155,7 @@ const I18N = {
     'hud.effects': 'ЭФФЕКТЫ',
     'hud.secondsAbbrev': 'с',
     'hud.permanent': 'НАВСЕГДА',
+    'hud.immune': 'НЕУЯЗВИМ',
 
     'unit.m': 'м',
 

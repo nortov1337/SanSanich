@@ -1048,7 +1048,8 @@
       "duration": 10,
       "damageMultiplier": 2,
       "attackSpeedMultiplier": 2,
-      "moveSpeedMultiplier": 2
+      "moveSpeedMultiplier": 2,
+      "invulnerable": true
     },
     "frenzy": {
       "name": "Frenzy",
@@ -1057,7 +1058,8 @@
       "color": "#ff9f43",
       "duration": 30,
       "damageMultiplier": 2,
-      "healToFull": true
+      "healToFull": true,
+      "invulnerable": true
     }
   }
 }
