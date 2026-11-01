@@ -71,7 +71,7 @@ Always visible in the top-left corner:
 
 Health, depth in meters, zone/danger, the kill counter and the current weapon are on screen too.
 
-Active **effects** and permanent gifts are listed in a panel under UniBuff: name, icon, remaining seconds and a timer bar. Permanent gifts show `∞`.
+Active **effects** and permanent gifts are listed in a panel under UniBuff: name, icon, remaining seconds and a timer bar. Permanent gifts are marked **FOREVER** (НАВСЕГДА).
 
 ## Talents
 

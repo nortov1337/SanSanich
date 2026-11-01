@@ -62,6 +62,7 @@ const I18N = {
     'hud.runeGain': 'RUNE “{name}”',
     'hud.effects': 'EFFECTS',
     'hud.secondsAbbrev': 's',
+    'hud.permanent': 'FOREVER',
 
     'unit.m': 'm',
 
@@ -151,6 +152,7 @@ const I18N = {
     'hud.runeGain': 'РУНА «{name}»',
     'hud.effects': 'ЭФФЕКТЫ',
     'hud.secondsAbbrev': 'с',
+    'hud.permanent': 'НАВСЕГДА',
 
     'unit.m': 'м',
 

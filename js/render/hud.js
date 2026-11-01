@@ -255,10 +255,10 @@ function drawEffects(ctx, p) {
     ctx.fillText(row.name, x + 44, ry + 9);
 
     ctx.textAlign = 'right';
-    ctx.font = '800 11px "Trebuchet MS", sans-serif';
+    ctx.font = row.infinite ? '800 8px "Trebuchet MS", sans-serif' : '800 11px "Trebuchet MS", sans-serif';
     ctx.fillStyle = color;
     ctx.fillText(
-      row.infinite ? '∞' : Math.ceil(row.time) + tr('hud.secondsAbbrev'),
+      row.infinite ? tr('hud.permanent') : Math.ceil(row.time) + tr('hud.secondsAbbrev'),
       x + w - 16,
       ry + 9
     );
