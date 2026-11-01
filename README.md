@@ -1,6 +1,6 @@
 # Syn Sanych — Path of Sani
 
-An endless 2D platformer-slasher about the Veteran of All Greats, meme monsters, friendly characters, weapons, runes and UniBuff.
+An endless 2D platformer-slasher about a battle-hardened veteran, meme monsters, friendly characters, weapons, runes and UniBuff.
 Pure HTML + CSS + JavaScript (Canvas 2D), no build step and no dependencies.
 
 **Play online:** <https://synsanych.nortov.win>
