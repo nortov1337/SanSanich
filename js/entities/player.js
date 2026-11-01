@@ -582,7 +582,7 @@ class Player {
     ctx.arc(0, 0, 23.5, -2.4, -0.6);
     ctx.stroke();
 
-    /* корона Ветерана Всевеликих */
+    /* корона героя */
     ctx.save();
     ctx.translate(0, -24);
     ctx.fillStyle = '#ffd166';

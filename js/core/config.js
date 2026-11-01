@@ -5,7 +5,7 @@ const GAME_H = 720;
 const TAU = Math.PI * 2;
 
 /* версия сборки, чтобы браузер не подхватывал старые файлы из кэша */
-const BUILD_VERSION = '20261103-1';
+const BUILD_VERSION = '20261104-1';
 
 /* мир */
 let CHUNK_W = 1500;

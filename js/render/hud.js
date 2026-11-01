@@ -102,11 +102,6 @@ function drawHealth(ctx, game, p) {
     ctx.fillRect(bx, by + 2, bw, 4);
     ctx.restore();
   }
-
-  ctx.textAlign = 'left';
-  ctx.font = '700 10px "Trebuchet MS", sans-serif';
-  ctx.fillStyle = 'rgba(255,209,102,0.8)';
-  ctx.fillText(tr('hud.hero'), 100, 88);
 }
 
 function drawStats(ctx, p) {
