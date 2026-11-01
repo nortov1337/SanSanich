@@ -1,0 +1,8 @@
+# Keep the Windows launcher exactly as-is (CRLF), otherwise cmd may fail
+*.bat -text
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary

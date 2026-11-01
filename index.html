@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Сын Саныч — Путь Сани</title>
+  <meta name="description" content="Бесконечный 2D-платформер про кота, монстров, оружие, броню и руны." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="stage">
+    <canvas id="game" width="1280" height="720"></canvas>
+  </div>
+
+  <div id="ui">
+
+    <!-- МЕНЮ -->
+    <section class="overlay is-active" data-screen="menu">
+      <div class="panel menu-panel">
+        <div class="hero-badge">
+          <img id="hero-img" alt="Главный герой" />
+          <span class="hero-badge__ring"></span>
+        </div>
+
+        <h1 class="title">СЫН&nbsp;САНЫЧ<small>ПУТЬ САНИ</small></h1>
+        <p class="tagline">Бесконечный забег. Чем дальше — тем страшнее.</p>
+
+        <div class="keys">
+          <div class="key"><span><kbd>A</kbd><kbd>D</kbd></span><em>идти</em></div>
+          <div class="key"><kbd>SPACE</kbd><em>прыжок ×2</em></div>
+          <div class="key"><kbd>F</kbd><em>удар</em></div>
+          <div class="key"><kbd>E</kbd><em>оружие / руны</em></div>
+        </div>
+
+        <button id="btn-start" class="btn btn-primary" type="button">НАЧАТЬ ЗАБЕГ</button>
+        <p class="record">ЛУЧШИЙ ЗАБЕГ: <b id="menu-best">—</b></p>
+      </div>
+    </section>
+
+    <!-- ПАУЗА -->
+    <section class="overlay" data-screen="pause">
+      <div class="panel small-panel">
+        <h2 class="screen-title">ПАУЗА</h2>
+        <p class="screen-sub">Лес подождёт. Кот тоже.</p>
+        <div class="keys keys--compact">
+          <div class="key"><span><kbd>A</kbd><kbd>D</kbd></span><em>идти</em></div>
+          <div class="key"><kbd>SPACE</kbd><em>прыжок</em></div>
+          <div class="key"><kbd>F</kbd><em>удар</em></div>
+          <div class="key"><kbd>E</kbd><em>подобрать</em></div>
+        </div>
+        <div class="btn-row">
+          <button id="btn-resume" class="btn btn-primary" type="button">ПРОДОЛЖИТЬ</button>
+          <button id="btn-restart-pause" class="btn btn-ghost" type="button">ЗАНОВО</button>
+        </div>
+        <p class="tiny">ESC — продолжить · M — звук · R — заново</p>
+      </div>
+    </section>
+
+    <!-- СМЕРТЬ -->
+    <section class="overlay" data-screen="death">
+      <div class="panel small-panel panel--blood">
+        <h2 class="screen-title screen-title--red">КОТ ПАЛ</h2>
+        <p class="screen-sub">Но у него ещё есть восемь жизней. Наверное.</p>
+        <div class="stats">
+          <div class="stat"><span>Убито монстров</span><b id="death-kills">0</b></div>
+          <div class="stat"><span>Дистанция</span><b id="death-distance">0 м</b></div>
+          <div class="stat"><span>Рекорд</span><b id="death-best">—</b></div>
+          <div class="stat"><span>Время в пути</span><b id="death-time">0:00</b></div>
+        </div>
+        <div class="btn-row">
+          <button id="btn-restart-death" class="btn btn-primary" type="button">ЕЩЁ РАЗ</button>
+        </div>
+        <p class="tiny">R — попробовать снова</p>
+      </div>
+    </section>
+
+    <!-- ВЫБОР ТАЛАНТА -->
+    <section class="overlay" data-screen="talent">
+      <div class="panel talent-panel">
+        <h2 class="screen-title">ВЫБЕРИ ТАЛАНТ</h2>
+        <p class="screen-sub" id="talent-subtitle">Награда за 50 убийств. Выбор один раз за забег — второй талант больше не появится.</p>
+        <div class="talent-options" id="talent-options"></div>
+        <p class="tiny">Талант действует до конца забега</p>
+      </div>
+    </section>
+
+    <div class="corner-hint"><span id="mute-label">M — звук</span><span class="dot">·</span>ESC — пауза</div>
+  </div>
+
+  <!-- ЭКРАН ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ -->
+  <div class="device-gate" id="device-gate">
+    <div class="device-gate__panel">
+      <svg class="device-gate__icon" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="5" y="9" width="54" height="35" rx="5" fill="none" stroke="currentColor" stroke-width="3" />
+        <path d="M22 54h20M32 44v10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+        <path d="M13 18h38M13 25h22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.45" />
+      </svg>
+      <h2>НУЖНО ЗАЙТИ С ПК</h2>
+      <p>Игра рассчитана на клавиатуру и мышь.</p>
+      <p class="device-gate__hint">Открой её на компьютере или ноутбуке</p>
+    </div>
+  </div>
+
+  <!-- ЭКРАН ОШИБКИ ДАННЫХ -->
+  <div class="device-gate" id="data-gate">
+    <div class="device-gate__panel">
+      <svg class="device-gate__icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M32 8 58 54H6L32 8Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" />
+        <path d="M32 24v14" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+        <circle cx="32" cy="46" r="2.6" fill="currentColor" />
+      </svg>
+      <h2>НЕТ ДОСТУПА К ДАННЫМ</h2>
+      <p>Не удалось прочитать <b>data/game-data.json</b>.</p>
+      <p class="device-gate__hint">Запусти start-game.bat или локальный сервер</p>
+      <p class="tiny" id="data-error-detail"></p>
+    </div>
+  </div>
+
+  <script src="js/core/config.js"></script>
+  <script src="js/core/platform.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/input.js"></script>
+  <script src="js/core/audio.js"></script>
+  <script src="js/core/assets.js"></script>
+
+  <script src="js/data/weapons.js"></script>
+  <script src="js/render/weapon-art.js"></script>
+  <script src="js/data/monsters.js"></script>
+  <script src="js/data/runes.js"></script>
+  <script src="js/data/talents.js"></script>
+  <script src="js/core/data-loader.js"></script>
+
+  <script src="js/world/generator.js"></script>
+  <script src="js/world/world.js"></script>
+
+  <script src="js/entities/effects.js"></script>
+  <script src="js/entities/pickups.js"></script>
+  <script src="js/entities/player.js"></script>
+  <script src="js/entities/monster.js"></script>
+
+  <script src="js/render/background.js"></script>
+  <script src="js/render/world.js"></script>
+  <script src="js/render/hud.js"></script>
+
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+{
+  "heroImage": "Reference/Главный Герой.jpg",
+
+  "player": {
+    "maxHp": 100,
+    "runSpeed": 400,
+    "jumpVelocity": -950,
+    "gravity": 2500,
+    "maxMoveSpeedMultiplier": 2.5,
+    "minAttackCooldownMultiplier": 0.35
+  },
+
+  "unibuff": {
+    "name": "УниБаф",
+    "color": "#c9a7ff",
+    "damage": 0.04,
+    "attackSpeed": 0.03,
+    "moveSpeed": 0.03,
+    "maxHp": 2
+  },
+
+  "runes": {
+    "red": {
+      "name": "Ред",
+      "letter": "Р",
+      "color": "#ff5f7a",
+      "hint": "скорость перемещения",
+      "moveBonus": 0.07
+    },
+    "delta": {
+      "name": "Дельта",
+      "letter": "Д",
+      "color": "#6fd8ff",
+      "hint": "скорость атаки",
+      "attackSpeedBonus": 0.12
+    },
+    "zetel": {
+      "name": "Зетель",
+      "letter": "З",
+      "color": "#ffd166",
+      "hint": "двойной урон",
+      "damageBonus": 1.0
+    }
+  },
+
+  "talents": {
+    "heal_on_kill": {
+      "name": "Жажда крови",
+      "icon": "❤",
+      "description": "Восстанавливать 5 HP при убийстве монстра",
+      "effect": "healOnKill",
+      "value": 5
+    },
+    "unibuff_per_ten": {
+      "name": "Поток силы",
+      "icon": "★",
+      "description": "+10 УниБафов за каждые 10 убийств",
+      "effect": "unibuffEveryKills",
+      "kills": 10,
+      "amount": 10
+    }
+  },
+
+  "weapons": {
+    "fist": {
+      "id": "fist",
+      "name": "Кулак",
+      "tag": "то, с чего все начинают",
+      "dmg": 10,
+      "reach": 44,
+      "cd": 0.3,
+      "duration": 0.24,
+      "knock": 240,
+      "color": "#f3c9b0",
+      "tier": 0
+    },
+    "rusty": {
+      "id": "rusty",
+      "name": "Ржавый тесак",
+      "tag": "нашёл в кустах. пахнет историей",
+      "dmg": 17,
+      "reach": 54,
+      "cd": 0.36,
+      "duration": 0.27,
+      "knock": 330,
+      "color": "#c8b18d",
+      "tier": 1
+    },
+    "blade": {
+      "id": "blade",
+      "name": "Клинок Надежды",
+      "tag": "лёгкий, звонкий, почти новый",
+      "dmg": 25,
+      "reach": 60,
+      "cd": 0.4,
+      "duration": 0.29,
+      "knock": 360,
+      "color": "#8fd8ff",
+      "tier": 2
+    },
+    "katana": {
+      "id": "katana",
+      "name": "Катана Уцы",
+      "tag": "розовая. очень розовая",
+      "dmg": 34,
+      "reach": 66,
+      "cd": 0.32,
+      "duration": 0.24,
+      "knock": 300,
+      "color": "#ff7fb0",
+      "tier": 3
+    },
+    "axe": {
+      "id": "axe",
+      "name": "Секира Огроса",
+      "tag": "тяжёлая, зелёная, злая",
+      "dmg": 48,
+      "reach": 72,
+      "cd": 0.55,
+      "duration": 0.36,
+      "knock": 600,
+      "color": "#a6e87a",
+      "tier": 4
+    },
+    "hero": {
+      "id": "hero",
+      "name": "Меч Героя",
+      "tag": "светится. значит, можно",
+      "dmg": 62,
+      "reach": 80,
+      "cd": 0.44,
+      "duration": 0.32,
+      "knock": 460,
+      "color": "#ffd76a",
+      "tier": 5
+    }
+  },
+
+  "monsters": {
+    "kiss": {
+      "name": "УцыУфЭ",
+      "img": "kiss",
+      "image": "Reference/monsters/УцыУфЭ.jpg",
+      "hp": 26,
+      "dmg": 6,
+      "speed": 252,
+      "scale": 0.78,
+      "aggro": 470,
+      "reach": 56,
+      "windup": 0.26,
+      "cooldown": 0.72,
+      "knock": 190,
+      "body": "#b5638f",
+      "belly": "#f0a6c9",
+      "leg": "#7a3f62",
+      "accent": "#ffb3d0"
+    },
+    "pescheros": {
+      "name": "Пещерос",
+      "img": "pescheros",
+      "image": "Reference/monsters/Пещерос.jpg",
+      "hp": 50,
+      "dmg": 9,
+      "speed": 214,
+      "scale": 0.95,
+      "aggro": 500,
+      "reach": 66,
+      "windup": 0.34,
+      "cooldown": 0.95,
+      "knock": 240,
+      "body": "#7d68b5",
+      "belly": "#b6a4e6",
+      "leg": "#584789",
+      "accent": "#c2a8ff"
+    },
+    "undefined": {
+      "name": "Undefined",
+      "img": "undefined",
+      "image": "Reference/monsters/Undefined.png",
+      "hp": 66,
+      "dmg": 12,
+      "speed": 262,
+      "scale": 1.0,
+      "aggro": 540,
+      "reach": 68,
+      "windup": 0.3,
+      "cooldown": 0.84,
+      "knock": 260,
+      "body": "#5f7285",
+      "belly": "#a0b6c7",
+      "leg": "#40505f",
+      "accent": "#a9c9e0"
+    },
+    "ucept": {
+      "name": "Уцеплясцжирэ",
+      "img": "ucept",
+      "image": "Reference/monsters/Уцеплясцжирэ.jpg",
+      "hp": 78,
+      "dmg": 14,
+      "speed": 204,
+      "scale": 1.0,
+      "aggro": 480,
+      "reach": 72,
+      "windup": 0.38,
+      "cooldown": 1.0,
+      "knock": 280,
+      "body": "#4f9e86",
+      "belly": "#9fdcc6",
+      "leg": "#37705f",
+      "accent": "#8ff0cf"
+    },
+    "ebalokluv": {
+      "name": "Ебалоклюв",
+      "img": "ebalokluv",
+      "image": "Reference/monsters/Ебалоклюв.jpg",
+      "hp": 100,
+      "dmg": 17,
+      "speed": 226,
+      "scale": 1.12,
+      "aggro": 520,
+      "reach": 78,
+      "windup": 0.42,
+      "cooldown": 1.05,
+      "knock": 320,
+      "body": "#a45f92",
+      "belly": "#dda3c9",
+      "leg": "#703f65",
+      "accent": "#ffa3d8"
+    },
+    "ogros": {
+      "name": "Огрос Нарепос",
+      "img": "ogros",
+      "image": "Reference/monsters/Огрос Нарепос.jpg",
+      "hp": 180,
+      "dmg": 21,
+      "speed": 192,
+      "scale": 1.3,
+      "aggro": 640,
+      "reach": 88,
+      "windup": 0.48,
+      "cooldown": 1.15,
+      "knock": 380,
+      "body": "#7a9c4f",
+      "belly": "#b9d98d",
+      "leg": "#556b34",
+      "accent": "#c9f08a"
+    },
+    "veteran": {
+      "name": "Ветеран Всевеликих",
+      "img": "veteran",
+      "image": "Reference/monsters/Ветеран Всевеликих.png",
+      "crown": true,
+      "hp": 380,
+      "dmg": 23,
+      "speed": 155,
+      "scale": 1.55,
+      "aggro": 760,
+      "reach": 102,
+      "windup": 0.55,
+      "cooldown": 1.3,
+      "knock": 460,
+      "body": "#b39a3f",
+      "belly": "#e8d483",
+      "leg": "#7a6826",
+      "accent": "#ffe27a"
+    }
+  },
+
+  "spawning": {
+    "weaponUnlocks": [
+      { "id": "rusty", "minPower": 0 },
+      { "id": "blade", "minPower": 1.0 },
+      { "id": "katana", "minPower": 2.4 },
+      { "id": "axe", "minPower": 3.8 },
+      { "id": "hero", "minPower": 5.4 }
+    ],
+    "monsterPools": [
+      { "minPower": 0, "types": ["kiss"] },
+      { "minPower": 0.9, "types": ["kiss", "kiss", "pescheros"] },
+      { "minPower": 1.8, "types": ["kiss", "pescheros", "undefined"] },
+      { "minPower": 3.0, "types": ["pescheros", "undefined", "ucept"] },
+      { "minPower": 4.2, "types": ["undefined", "ucept", "ebalokluv"] },
+      { "minPower": 5.6, "types": ["ucept", "ebalokluv", "ogros"] },
+      { "minPower": 7.2, "types": ["ebalokluv", "ogros", "ogros", "ucept", "undefined"] },
+      {
+        "minDepth": 1000,
+        "types": ["veteran", "ogros", "ogros", "ebalokluv", "ebalokluv", "ucept", "ucept", "undefined", "undefined", "ogros", "ebalokluv", "undefined"]
+      }
+    ]
+  },
+
+  "world": {
+    "chunkWidth": 1500,
+    "groundY": 600,
+    "weaponDamagePerLevel": 0.5,
+    "weaponReachPerLevel": 1.2,
+    "maxWeaponReachBonus": 20,
+    "monsterHpPerPower": 0.6,
+    "monsterDamagePerPower": 0.22,
+    "monsterSpeedPerPower": 0.045,
+    "monsterSpeedCap": 0.45,
+    "chaseSpeedMultiplier": 1.08,
+    "chaseMinBonus": 20,
+    "chaseGapStart": 320,
+    "chaseGapBoost": 0.18,
+    "chaseGapMax": 180,
+    "heartHealBase": 20,
+    "heartHealPerPower": 4,
+    "talentKillThreshold": 50,
+    "talentChoices": 2,
+    "waves": {
+      "startDelay": 15,
+      "minInterval": 5,
+      "baseInterval": 15,
+      "dangerInterval": 0.6,
+      "maxMonsters": 55
+    }
+  }
+}
