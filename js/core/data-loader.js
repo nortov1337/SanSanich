@@ -1,20 +1,21 @@
 'use strict';
 
-/* =========================================================
-   data-loader.js — загрузка и применение data/game-data.json
-   ========================================================= */
-
 let DATA = null;
 
 async function loadGameData() {
-  const response = await fetch('data/game-data.json', { cache: 'no-store' });
-  if (!response.ok) throw new Error('HTTP ' + response.status + ' while loading data/game-data.json');
+  const version = typeof BUILD_VERSION !== 'undefined' ? BUILD_VERSION : '1';
+  const response = await fetch('data/game-data.json?v=' + version, { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error(tr('gate.dataHttp', { status: response.status }));
+  }
   return response.json();
 }
 
 function applyGameData(data) {
   if (!data || !data.weapons || !data.monsters || !data.runes || !data.unibuff || !data.talents) {
-    throw new Error('game-data.json is missing required sections: weapons, monsters, runes, unibuff, talents');
+    throw new Error(tr('gate.dataSections', {
+      list: 'weapons, monsters, runes, unibuff, talents'
+    }));
   }
 
   DATA = data;

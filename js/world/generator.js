@@ -1,9 +1,5 @@
 'use strict';
 
-/* =========================================================
-   generator.js — процедурная генерация чанков
-   ========================================================= */
-
 const PROP_KINDS = ['stone', 'bone', 'mushroom', 'grass', 'grass', 'skull', 'crystal'];
 const PLATFORM_LEVELS = [340, 395, 450, 490];
 
@@ -49,7 +45,7 @@ function generateChunk(index, worldSeed) {
   const isIntro = index === 0;
   const power = index * 0.92;
 
-  /* --- земля и ямы --- */
+  // земля и ямы
   const ground = [];
   const gaps = [];
 
@@ -77,7 +73,7 @@ function generateChunk(index, worldSeed) {
     if (!ground.length) ground.push({ x: startX, w: CHUNK_W });
   }
 
-  /* --- платформы --- */
+  // платформы
   const platforms = [];
   if (isIntro) {
     platforms.push({ x: 480, y: 480, w: 160 });
@@ -100,7 +96,7 @@ function generateChunk(index, worldSeed) {
     }
   }
 
-  /* --- хелперы размещения --- */
+  // хелперы размещения
   const pickGroundSpot = (margin = 70) => {
     const seg = pickFrom(rng, ground);
     if (!seg || seg.w <= margin * 2) return null;
@@ -142,7 +138,7 @@ function generateChunk(index, worldSeed) {
     return null;
   };
 
-  /* --- монстры --- */
+  // монстры
   const monsters = [];
   if (isIntro) {
     monsters.push({ type: 'kiss', x: 720, y: GROUND_Y, power: 0 });
@@ -158,7 +154,7 @@ function generateChunk(index, worldSeed) {
     }
   }
 
-  /* --- лут --- */
+  // лут
   const weapons = [];
   const runes = [];
   const hearts = [];
@@ -197,7 +193,7 @@ function generateChunk(index, worldSeed) {
     }
   }
 
-  /* --- декор --- */
+  // декор
   const torches = [];
   if (isIntro) {
     torches.push({ x: 230 }, { x: 1120 }, { x: 1420 });

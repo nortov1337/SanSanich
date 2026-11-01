@@ -1,16 +1,14 @@
 'use strict';
 
-/* =========================================================
-   main.js — загрузка данных, ассетов и запуск
-   ========================================================= */
-
 function showDataError(error) {
-  console.error('Failed to load game data:', error);
+  console.error('Не удалось загрузить данные игры:', error);
   document.body.classList.add('data-error');
 
   const detail = document.getElementById('data-error-detail');
   if (detail) {
-    detail.textContent = error && error.message ? error.message : String(error);
+    const message = error && error.message ? error.message : String(error);
+    const network = /Failed to fetch|NetworkError|Load failed/i.test(message);
+    detail.textContent = network ? tr('gate.dataNetwork') : message;
   }
 }
 

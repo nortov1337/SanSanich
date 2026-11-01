@@ -1,9 +1,5 @@
 'use strict';
 
-/* =========================================================
-   player.js — кот, физика, атака и личные характеристики
-   ========================================================= */
-
 class Player {
   constructor(x, feetY) {
     this.w = PLAYER_W;
@@ -47,7 +43,7 @@ class Player {
     return { x: this.x, y: this.y, w: this.w, h: this.h };
   }
 
-  /* ---------- характеристики ---------- */
+  // характеристики
 
   runSpeed() {
     const fromBuffs = 1 + UNIBUFF.moveSpeed * this.unibuffs;
@@ -97,7 +93,7 @@ class Player {
     return Math.max(1, Math.round(base * this.effectMultiplier('damageMultiplier')));
   }
 
-  /* ---------- временные эффекты друзей ---------- */
+  // временные эффекты друзей
 
   effectMultiplier(key) {
     let mult = 1;
@@ -160,7 +156,7 @@ class Player {
     this.hp = Math.min(this.maxHp, this.hp + hpPer * n);
   }
 
-  /* ---------- обновление ---------- */
+  // обновление
 
   update(dt, game) {
     const input = game.input;
@@ -429,7 +425,7 @@ class Player {
     }
   }
 
-  /* ---------- отрисовка ---------- */
+  // отрисовка
 
   draw(ctx, game) {
     const cx = this.cx();

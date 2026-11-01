@@ -1,9 +1,5 @@
 'use strict';
 
-/* =========================================================
-   weapons.js — оружие загружается из data/game-data.json
-   ========================================================= */
-
 let WEAPONS = {};
 
 /* Экземпляр оружия, усиленный по глубине */
@@ -21,7 +17,6 @@ function makeWeapon(id, level = 0) {
     ...base,
     level: lv,
     dmg: Math.max(1, Math.round(base.dmg * (1 + lv * dmgPerLevel))),
-    reach: base.reach + Math.min(maxReachBonus, lv * reachPerLevel),
-    label: lv > 0 ? base.name + ' +' + lv : base.name
+    reach: base.reach + Math.min(maxReachBonus, lv * reachPerLevel)
   };
 }

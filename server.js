@@ -1,9 +1,6 @@
 'use strict';
 
-/* =========================================================
-   server.js — крошечный локальный сервер для игры
-   Запуск: node server.js  (или start-game.bat)
-   ========================================================= */
+// крошечный локальный сервер: node server.js (или start-game.bat)
 
 const http = require('http');
 const fs = require('fs');

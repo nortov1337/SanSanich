@@ -1,9 +1,5 @@
 'use strict';
 
-/* =========================================================
-   game.js — состояние забега, цикл, волны и экономика
-   ========================================================= */
-
 class Game {
   constructor(canvas) {
     this.canvas = canvas;
@@ -69,7 +65,7 @@ class Game {
     requestAnimationFrame(this.loop);
   }
 
-  /* ---------- рекорд ---------- */
+  // рекорд
 
   loadBest() {
     try {
@@ -92,7 +88,7 @@ class Game {
     el.textContent = this.bestDistance > 0 ? formatMeters(this.bestDistance) : '—';
   }
 
-  /* ---------- подготовка ---------- */
+  // подготовка
 
   fit() {
     const scale = Math.min(window.innerWidth / GAME_W, window.innerHeight / GAME_H);
@@ -217,7 +213,7 @@ class Game {
     });
   }
 
-  /* ---------- дистанция и сложность ---------- */
+  // дистанция и сложность
 
   distanceMeters() {
     if (!this.player) return 0;
@@ -229,7 +225,7 @@ class Game {
     return Math.max(0, this.player.cx() / 1600 + this.runTime / 100);
   }
 
-  /* ---------- события ---------- */
+  // события
 
   onDeath() {
     if (this.state === 'dying' || this.state === 'dead') return;
@@ -256,7 +252,7 @@ class Game {
     document.getElementById('death-time').textContent = formatTime(this.runTime);
   }
 
-  /* ---------- главный цикл ---------- */
+  // главный цикл
 
   loop(ts) {
     requestAnimationFrame(this.loop);
@@ -385,7 +381,7 @@ class Game {
     this.maybeOfferTalent();
   }
 
-  /* ---------- таланты ---------- */
+  // таланты
 
   talentThreshold() {
     const world = (DATA && DATA.world) ? DATA.world : {};
@@ -536,7 +532,7 @@ class Game {
     }
   }
 
-  /* ---------- дружелюбные персонажи ---------- */
+  // дружелюбные персонажи
 
   updateFriends(dt) {
     const cfg = (DATA && DATA.friends) ? DATA.friends : null;
@@ -776,7 +772,7 @@ class Game {
     if (this.camera.shake < 0.2) this.camera.shake = 0;
   }
 
-  /* ---------- эффекты и экономика ---------- */
+  // эффекты и экономика
 
   spawnBurst(x, y, color, count) {
     for (let i = 0; i < count; i++) {
@@ -837,7 +833,7 @@ class Game {
     this.camera.shake = Math.max(this.camera.shake, 6);
   }
 
-  /* ---------- рендер ---------- */
+  // рендер
 
   render() {
     const ctx = this.ctx;

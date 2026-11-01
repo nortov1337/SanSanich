@@ -1,4 +1,4 @@
-/* ===== САН САНИЧ — ПУТЬ КОТА ===== */
+/* СЫН САНЫЧ — ПУТЬ САНИ */
 
 :root {
   --bg: #07050d;
@@ -62,7 +62,7 @@ body::before {
   pointer-events: none;
 }
 
-/* ===== ОВЕРЛЕИ ===== */
+/* ОВЕРЛЕИ */
 
 .overlay {
   position: absolute;
@@ -124,7 +124,7 @@ body::before {
   to { transform: none; opacity: 1; }
 }
 
-/* ===== МЕНЮ ===== */
+/* МЕНЮ */
 
 .hero-badge {
   position: relative;
@@ -242,7 +242,7 @@ kbd {
   margin-bottom: 18px;
 }
 
-/* ===== КНОПКИ ===== */
+/* КНОПКИ */
 
 .btn {
   appearance: none;
@@ -307,7 +307,7 @@ kbd {
   letter-spacing: 1px;
 }
 
-/* ===== ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ===== */
+/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА */
 
 .lang-switch {
   display: flex;
@@ -351,7 +351,7 @@ kbd {
   box-shadow: 0 6px 18px rgba(255, 79, 139, 0.25);
 }
 
-/* ===== ЭКРАНЫ СОСТОЯНИЙ ===== */
+/* ЭКРАНЫ СОСТОЯНИЙ */
 
 .small-panel { width: min(470px, 100%); padding: 32px 32px 24px; }
 
@@ -428,7 +428,7 @@ kbd {
 
 .corner-hint .dot { opacity: 0.5; }
 
-/* ===== ЭКРАН ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ ===== */
+/* ЭКРАН ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ */
 
 .device-gate {
   position: fixed;
@@ -504,7 +504,7 @@ body.is-mobile { overflow: hidden; }
   text-transform: uppercase;
 }
 
-/* ===== ВЫБОР ТАЛАНТА ===== */
+/* ВЫБОР ТАЛАНТА */
 
 .talent-panel {
   width: min(620px, 100%);
@@ -572,7 +572,7 @@ body.is-mobile { overflow: hidden; }
   .talent-options { grid-template-columns: 1fr; }
 }
 
-/* ===== ДРУЖЕЛЮБНЫЕ ПЕРСОНАЖИ ===== */
+/* ДРУЖЕЛЮБНЫЕ ПЕРСОНАЖИ */
 
 .friend-panel {
   width: min(780px, 100%);

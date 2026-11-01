@@ -1,12 +1,9 @@
 'use strict';
 
-/* =========================================================
-   i18n.js — English by default, Russian localization
-   ========================================================= */
-
 const I18N = {
   en: {
     'page.title': 'Syn Sanych — Path of Sani',
+    'page.description': 'Syn Sanych — Path of Sani: an endless 2D platformer with meme monsters, friendly characters, weapons, runes and talents.',
 
     'menu.title': 'SYN SANYCH',
     'menu.subtitle': 'PATH OF SANI',
@@ -92,11 +89,15 @@ const I18N = {
 
     'gate.dataTitle': 'DATA UNAVAILABLE',
     'gate.dataLine': 'Could not read data/game-data.json.',
-    'gate.dataHint': 'Run start-game.bat or a local server'
+    'gate.dataHint': 'Run start-game.bat or a local server',
+    'gate.dataNetwork': 'The file could not be loaded: the server is off or access is blocked',
+    'gate.dataHttp': 'HTTP {status} while loading game-data.json',
+    'gate.dataSections': 'game-data.json has no required sections: {list}'
   },
 
   ru: {
     'page.title': 'Сын Саныч — Путь Сани',
+    'page.description': 'Сын Саныч — Путь Сани: бесконечный 2D-платформер с мемными монстрами, друзьями, оружием, рунами и талантами.',
 
     'menu.title': 'СЫН САНЫЧ',
     'menu.subtitle': 'ПУТЬ САНИ',
@@ -182,16 +183,25 @@ const I18N = {
 
     'gate.dataTitle': 'НЕТ ДОСТУПА К ДАННЫМ',
     'gate.dataLine': 'Не удалось прочитать data/game-data.json.',
-    'gate.dataHint': 'Запусти start-game.bat или локальный сервер'
+    'gate.dataHint': 'Запусти start-game.bat или локальный сервер',
+    'gate.dataNetwork': 'Файл не загрузился: сервер выключен или доступ заблокирован',
+    'gate.dataHttp': 'HTTP {status} при загрузке game-data.json',
+    'gate.dataSections': 'В game-data.json нет обязательных разделов: {list}'
   }
 };
 
 let currentLang = 'en';
+let savedLang = null;
 
 try {
-  const saved = localStorage.getItem('synSanychLang');
-  if (saved === 'en' || saved === 'ru') currentLang = saved;
-} catch (err) { /* localStorage may be unavailable */ }
+  savedLang = localStorage.getItem('synSanychLang');
+} catch (err) { /* localStorage может быть недоступен */ }
+
+if (savedLang === 'en' || savedLang === 'ru') {
+  currentLang = savedLang;
+} else if (typeof navigator !== 'undefined' && /^ru\b/i.test(navigator.language || '')) {
+  currentLang = 'ru';
+}
 
 function tr(key, params) {
   const locale = I18N[currentLang] || I18N.en;
@@ -286,6 +296,9 @@ function applyI18nDom() {
   document.documentElement.lang = currentLang;
   document.title = tr('page.title');
 
+  const description = document.querySelector('meta[name="description"]');
+  if (description) description.content = tr('page.description');
+
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     el.textContent = tr(el.dataset.i18n);
   });
@@ -302,7 +315,7 @@ function setLanguage(lang, persist = true) {
   currentLang = lang;
 
   if (persist) {
-    try { localStorage.setItem('synSanychLang', lang); } catch (err) { /* ignore */ }
+    try { localStorage.setItem('synSanychLang', lang); } catch (err) { /* нет доступа */ }
   }
 
   applyI18nDom();

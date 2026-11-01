@@ -1,9 +1,5 @@
 'use strict';
 
-/* =========================================================
-   weapon-art.js — векторная отрисовка оружия
-   ========================================================= */
-
 /* Оружие рисуется от рукояти (0,0), клинок смотрит в +X */
 function drawWeapon(ctx, wpn, x, y, angle, scale = 1) {
   ctx.save();
@@ -26,7 +22,7 @@ function drawWeapon(ctx, wpn, x, y, angle, scale = 1) {
     case 'scythe': drawScythe(ctx); break;
     case 'trident': drawTrident(ctx); break;
     case 'hammer': drawHammer(ctx); break;
-    default: drawPaw(ctx);
+    default: drawBlade(ctx);
   }
 
   ctx.restore();

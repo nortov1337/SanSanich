@@ -1,9 +1,5 @@
 'use strict';
 
-/* =========================================================
-   world-render.js — отрисовка земли, платформ и декора
-   ========================================================= */
-
 Render.world = function (ctx, game, camX) {
   drawPits(ctx, camX);
   drawGround(ctx, camX);

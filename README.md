@@ -5,7 +5,7 @@ Pure HTML + CSS + JavaScript (Canvas 2D), no build step and no dependencies.
 
 **Play online:** <https://synsanych.nortov.win>
 
-The game is in English by default, with a full Russian localization — switch languages with the **EN / RU** buttons on the menu or pause screen.
+English is the base language. Russian browsers get the Russian UI automatically; the **EN / RU** buttons on the menu and pause screen switch it at any time and remember the choice.
 
 ## Running locally
 
@@ -209,7 +209,7 @@ server.js              local server (needed to load the JSON)
 start-game.bat         Windows launcher (Node → Python fallback)
 js/
   core/
-    config.js          base constants
+    config.js          base constants and build version
     platform.js        PC / phone / tablet detection
     i18n.js            EN/RU localization layer
     data-loader.js     loads and applies game-data.json
@@ -240,13 +240,11 @@ js/
   main.js              JSON and asset loading, boot
 ```
 
-Scripts are loaded with plain `<script>` tags in a strict order. The JSON is read via `fetch`, so the game needs a local server (started by `start-game.bat`). React was not needed: all graphics are Canvas, the interface is light DOM/CSS.
+Scripts are loaded with plain `<script>` tags in a strict order. The JSON is read via `fetch`, so the game needs a local server (started by `start-game.bat`). There is no build step: Canvas handles the game, plain DOM/CSS handles the menus.
+
+When releasing, bump `BUILD_VERSION` in `js/core/config.js` and the `?v=` parameter on the files in `index.html`. All assets and the JSON request include that version, so browsers and Cloudflare never mix an old script with new data.
 
 ## Debug parameters
 
 - `http://localhost:8123/index.html?play=1` — start a run immediately.
 - `http://localhost:8123/index.html?play=1&x=12000` — start at 12000 px depth (25 px = 1 m).
-
-## License
-
-Free to use, modify and share.

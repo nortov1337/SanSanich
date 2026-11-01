@@ -1,9 +1,5 @@
 'use strict';
 
-/* =========================================================
-   platform.js — проверка устройства
-   ========================================================= */
-
 function isMobileOrTablet() {
   const ua = navigator.userAgent || '';
   const mobileUA = /Android|iPhone|iPad|iPod|Mobile|Tablet|Silk|Kindle|PlayBook|BlackBerry|Opera Mini|IEMobile/i.test(ua);

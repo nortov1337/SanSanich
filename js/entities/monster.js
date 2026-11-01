@@ -1,14 +1,9 @@
 'use strict';
 
-/* =========================================================
-   monster.js — ИИ, физика и отрисовка монстров
-   ========================================================= */
-
 class Monster {
   constructor(spawn) {
     const type = MONSTER_TYPES[spawn.type];
     this.type = type;
-    this.name = type.name;
     this.scale = type.scale;
     this.img = IMAGES.monsters[type.img];
     this.power = spawn.power || 0;
@@ -299,7 +294,7 @@ class Monster {
     game.onMonsterKilled(this);
   }
 
-  /* ---------- отрисовка ---------- */
+  // отрисовка
 
   draw(ctx, game) {
     const s = this.scale;

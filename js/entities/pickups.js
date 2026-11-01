@@ -1,9 +1,5 @@
 'use strict';
 
-/* =========================================================
-   pickups.js — оружие, руны, УниБаф, сердца
-   ========================================================= */
-
 class WeaponPickup {
   constructor(wpn, x, y) {
     this.kind = 'weapon';
@@ -151,14 +147,14 @@ class RunePickup {
     ctx.lineWidth = 3;
     ctx.strokeStyle = 'rgba(8,5,14,0.85)';
     const runeTitle = tr('pickup.runeTitle', { name: runeName(this.rune) });
-    ctx.strokeText(runeTitle, this.x, this.baseY + 34);
+    ctx.strokeText(runeTitle, this.x, this.baseY + 40);
     ctx.fillStyle = color;
-    ctx.fillText(runeTitle, this.x, this.baseY + 34);
+    ctx.fillText(runeTitle, this.x, this.baseY + 40);
     ctx.font = '600 9px "Trebuchet MS", sans-serif';
     const hint = runeHint(this.rune);
-    ctx.strokeText(hint, this.x, this.baseY + 47);
+    ctx.strokeText(hint, this.x, this.baseY + 53);
     ctx.fillStyle = 'rgba(230,220,250,0.72)';
-    ctx.fillText(hint, this.x, this.baseY + 47);
+    ctx.fillText(hint, this.x, this.baseY + 53);
     ctx.restore();
 
     if (game.player.nearPickup === this) {

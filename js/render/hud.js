@@ -1,9 +1,5 @@
 'use strict';
 
-/* =========================================================
-   hud.js — интерфейс: здоровье, атрибуты, руны, глубина
-   ========================================================= */
-
 Render.hud = function (ctx, game) {
   const p = game.player;
   if (!p) return;
@@ -52,7 +48,7 @@ Render.screenEffects = function (ctx, game) {
   }
 };
 
-/* ---------- блоки ---------- */
+// блоки
 
 function drawHealth(ctx, game, p) {
   const pct = clamp(p.hp / p.maxHp, 0, 1);
