@@ -411,32 +411,6 @@ class Monster {
     ctx.beginPath();
     ctx.arc(0, 0, headR - 2.5 * s, -2.5, -0.65);
     ctx.stroke();
-
-    /* корона Ветерана Всевеликих */
-    if (this.type.crown) {
-      ctx.save();
-      ctx.translate(0, -headR - 4 * s);
-      ctx.fillStyle = '#ffd166';
-      ctx.strokeStyle = '#8a5a13';
-      ctx.lineWidth = 1.4 * s;
-      ctx.beginPath();
-      ctx.moveTo(-16 * s, 4 * s);
-      ctx.lineTo(-16 * s, -8 * s);
-      ctx.lineTo(-8 * s, -1 * s);
-      ctx.lineTo(0, -12 * s);
-      ctx.lineTo(8 * s, -1 * s);
-      ctx.lineTo(16 * s, -8 * s);
-      ctx.lineTo(16 * s, 4 * s);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-
-      ctx.fillStyle = '#ff5f7a';
-      ctx.beginPath();
-      ctx.arc(0, -2 * s, 2.2 * s, 0, TAU);
-      ctx.fill();
-      ctx.restore();
-    }
     ctx.restore();
 
     ctx.restore();
@@ -460,8 +434,7 @@ class Monster {
     const s = this.scale;
     const w = Math.max(52, 66 * s);
     const x = this.x - w / 2;
-    const crownPad = this.type.crown ? 30 : 0;
-    const y = this.y - this.visualHeight() - 16 - crownPad;
+    const y = this.y - this.visualHeight() - 16;
     const pct = clamp(this.hpShown / this.maxHp, 0, 1);
 
     ctx.save();

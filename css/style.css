@@ -126,6 +126,16 @@ body::before {
 
 /* МЕНЮ */
 
+.hero-name {
+  margin: 12px 0 -2px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 209, 102, 0.9);
+  text-shadow: 0 0 14px rgba(255, 209, 102, 0.25);
+}
+
 .hero-badge {
   position: relative;
   width: 98px;

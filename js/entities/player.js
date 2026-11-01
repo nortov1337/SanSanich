@@ -581,6 +581,30 @@ class Player {
     ctx.beginPath();
     ctx.arc(0, 0, 23.5, -2.4, -0.6);
     ctx.stroke();
+
+    /* корона Ветерана Всевеликих */
+    ctx.save();
+    ctx.translate(0, -24);
+    ctx.fillStyle = '#ffd166';
+    ctx.strokeStyle = '#8a5a13';
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.moveTo(-14, 2);
+    ctx.lineTo(-14, -8);
+    ctx.lineTo(-7, -2);
+    ctx.lineTo(0, -11);
+    ctx.lineTo(7, -2);
+    ctx.lineTo(14, -8);
+    ctx.lineTo(14, 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = '#ff5f7a';
+    ctx.beginPath();
+    ctx.arc(0, -2, 2.2, 0, TAU);
+    ctx.fill();
+    ctx.restore();
+
     ctx.restore();
 
     /* рука и оружие */

@@ -1,6 +1,6 @@
 # Syn Sanych — Path of Sani
 
-An endless 2D platformer-slasher about a cat, meme monsters, friendly characters, weapons, runes and UniBuff.
+An endless 2D platformer-slasher about the Veteran of All Greats, meme monsters, friendly characters, weapons, runes and UniBuff.
 Pure HTML + CSS + JavaScript (Canvas 2D), no build step and no dependencies.
 
 **Play online:** <https://synsanych.nortov.win>
@@ -35,7 +35,7 @@ All editable data lives in a single file — **`data/game-data.json`**:
 - `monsters` — every monster: HP, damage, speed, size, colors, images;
 - `friends` — friendly characters, their gifts, spawn threshold and rarity;
 - `effects` — timed effects (Confidence, Frenzy): duration and multipliers;
-- `spawning` — which monsters and weapons appear at which depth (`minPower` / `minDepth`). Veteran of All Greats is added to the pool with `minDepth: 1000`;
+- `spawning` — which monsters and weapons appear at which depth (`minPower` / `minDepth`);
 - `world` — chunk width, ground height, stat growth with depth, monster chase speed, heart healing, talent threshold, waves;
 - `heroImage` — path to the hero photo.
 
@@ -89,7 +89,7 @@ At **50 kills** the game once offers a choice of one talent out of two random on
 
 ## UniBuff
 
-**Every killed monster drops a UniBuff** — a glowing multicolored star. It is picked up automatically: it flies toward the cat.
+**Every killed monster drops a UniBuff** — a glowing multicolored star. It is picked up automatically: it flies toward the hero.
 
 One UniBuff gives everything at once:
 
@@ -135,10 +135,10 @@ Weapon power grows with depth: items drop with levels (`+N`) that increase damag
 ## The endless forest
 
 - The world is generated procedurally in 1500 px chunks and never ends.
-- The further the cat goes and the longer the run lasts, the higher the danger: monsters gain HP, damage and speed, and there are more of them.
+- The further the hero goes and the longer the run lasts, the higher the danger: monsters gain HP, damage and speed, and there are more of them.
 - Every few seconds a wave of monsters arrives from the edge of the screen.
-- You cannot simply run past monsters: while chasing they accelerate after the cat, get extra speed when they fall behind, and lunge during their wind-up to reach a running cat. Aggro is no longer dropped by distance, so outrunning them will not work.
-- Monsters patrol, chase the cat, and jump onto platforms and across pits.
+- You cannot simply run past monsters: while chasing they accelerate after the hero, get extra speed when they fall behind, and lunge during their wind-up to reach a running hero. Aggro is no longer dropped by distance, so outrunning them will not work.
+- Monsters patrol, chase the hero, and jump onto platforms and across pits.
 - There is no final boss: the goal is to get as far as possible. The record is saved in the browser.
 
 ## Monsters
@@ -178,8 +178,7 @@ From the `Reference/monsters` folder, names strictly by file:
 - **Morbidor** — big and mean;
 - **Tupoeblo** — slow, very tough;
 - **Mamosanos** — late-zone tank;
-- **Shevas** — the heaviest of the new arrivals;
-- **Veteran of All Greats** — elite crowned tank that appears from **1000 m** deep.
+- **Shevas** — the heaviest in the deep forest.
 
 ## Friendly characters
 
@@ -188,10 +187,11 @@ Starting from **15 kills**, friendly characters begin to appear in the forest �
 | Character | Gift |
 | --- | --- |
 | **Cat Healer** | Offers a choice of **+100 max health**, **+100 damage** or **+100 speed**. The gift is permanent for the rest of the run. |
-| **Gleko** | Grants **Confidence** for **10 seconds**: doubles damage, attack speed and movement speed, and makes the cat invulnerable. |
-| **Anton Gavnod** | Fully restores HP and grants **Frenzy** for **30 seconds**: doubles damage and makes the cat invulnerable. |
+| **Cat Healer Jr** | Half of his father's gift: **+50 max health**, **+50 damage** or **+50 speed**, permanent for the rest of the run. |
+| **Gleko** | Grants **Confidence** for **10 seconds**: doubles damage, attack speed and movement speed, and makes the hero invulnerable. |
+| **Anton Gavnod** | Fully restores HP and grants **Frenzy** for **30 seconds**: doubles damage and makes the hero invulnerable. |
 
-- The healer's choice opens a three-card screen; press `Esc` to postpone and talk again later.
+- Cat Healer and Cat Healer Jr open a three-card screen; press `Esc` to postpone and talk again later.
 - Timed effects stack with each other and with runes/UniBuff.
 - Active effects and permanent gifts are shown in the HUD panel under UniBuff, with timers.
 - Friendly characters cannot be attacked and do not attack; they disappear after giving their gift.
@@ -226,7 +226,7 @@ js/
     generator.js       procedural chunk generation
     world.js           world streaming and collisions
   entities/
-    player.js          the cat and its stats
+    player.js          the hero and its stats
     monster.js         monster AI and physics
     friend.js          friendly characters and their gifts
     pickups.js         weapons, runes, UniBuff, hearts

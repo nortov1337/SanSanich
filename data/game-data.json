@@ -1,5 +1,5 @@
 {
-  "heroImage": "Reference/Главный Герой.jpg",
+  "heroImage": "Reference/Главный герой.png",
   "player": {
     "maxHp": 100,
     "runSpeed": 400,
@@ -330,26 +330,6 @@
       "belly": "#b9d98d",
       "leg": "#556b34",
       "accent": "#c9f08a"
-    },
-    "veteran": {
-      "name": "Veteran of All Greats",
-      "nameRu": "Ветеран Всевеликих",
-      "img": "veteran",
-      "image": "Reference/monsters/Ветеран Всевеликих.png",
-      "crown": true,
-      "hp": 380,
-      "dmg": 23,
-      "speed": 155,
-      "scale": 1.55,
-      "aggro": 760,
-      "reach": 102,
-      "windup": 0.55,
-      "cooldown": 1.3,
-      "knock": 460,
-      "body": "#b39a3f",
-      "belly": "#e8d483",
-      "leg": "#7a6826",
-      "accent": "#ffe27a"
     },
     "petrults": {
       "name": "American Petrults",
@@ -905,7 +885,6 @@
       {
         "minDepth": 1000,
         "types": [
-          "veteran",
           "mamosanos",
           "shevas",
           "ogros",
@@ -1036,6 +1015,53 @@
         "buff": "frenzy",
         "greeting": "Hold the shield. Hit harder.",
         "greetingRu": "Держи щит. Бей сильнее."
+      },
+      "healer_jr": {
+        "name": "Cat Healer Jr",
+        "nameRu": "Кот Целитель Jr",
+        "img": "healer_jr",
+        "image": "Reference/good/Кот Целитель JR.jpg",
+        "scale": 1,
+        "icon": "✚",
+        "body": "#8f8c9b",
+        "belly": "#d8d4e0",
+        "leg": "#6f6b7b",
+        "accent": "#7dffb0",
+        "effect": "choice",
+        "greeting": "Dad taught me the basics. Take one small gift.",
+        "greetingRu": "Отец научил меня основам. Возьми один маленький подарок.",
+        "options": [
+          {
+            "id": "hp",
+            "stat": "hp",
+            "amount": 50,
+            "icon": "❤",
+            "name": "+50 max health",
+            "nameRu": "+50 к здоровью",
+            "description": "Half of the Cat Healer gift to max HP",
+            "descriptionRu": "Половина подарка Кота Целителя к здоровью"
+          },
+          {
+            "id": "damage",
+            "stat": "damage",
+            "amount": 50,
+            "icon": "⚔",
+            "name": "+50 damage",
+            "nameRu": "+50 к урону",
+            "description": "Half of the Cat Healer gift to damage",
+            "descriptionRu": "Половина подарка Кота Целителя к урону"
+          },
+          {
+            "id": "speed",
+            "stat": "speed",
+            "amount": 50,
+            "icon": "➤",
+            "name": "+50 speed",
+            "nameRu": "+50 к скорости",
+            "description": "Half of the Cat Healer gift to speed",
+            "descriptionRu": "Половина подарка Кота Целителя к скорости"
+          }
+        ]
       }
     }
   },
