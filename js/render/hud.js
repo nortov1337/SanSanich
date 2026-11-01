@@ -66,7 +66,7 @@ function drawHealth(ctx, game, p) {
   ctx.textAlign = 'left';
   ctx.font = '700 10px "Trebuchet MS", sans-serif';
   ctx.fillStyle = 'rgba(214,198,240,0.7)';
-  ctx.fillText('ЗДОРОВЬЕ', 100, 44);
+  ctx.fillText(tr('hud.health'), 100, 44);
 
   ctx.textAlign = 'right';
   ctx.fillStyle = 'rgba(240,234,255,0.9)';
@@ -109,7 +109,7 @@ function drawHealth(ctx, game, p) {
   ctx.textAlign = 'left';
   ctx.font = '700 10px "Trebuchet MS", sans-serif';
   ctx.fillStyle = 'rgba(255,209,102,0.8)';
-  ctx.fillText('СЫН САНЫЧ', 100, 88);
+  ctx.fillText(tr('hud.hero'), 100, 88);
 }
 
 function drawStats(ctx, p) {
@@ -117,9 +117,9 @@ function drawStats(ctx, p) {
   hudPanel(ctx, 22, y, 336, 62);
 
   const stats = [
-    { label: 'УРОН', value: String(p.effectiveDamage()), color: '#ffd166' },
-    { label: 'СКОР. АТАКИ', value: p.attackRate().toFixed(1) + '/с', color: '#6fd8ff' },
-    { label: 'СКОРОСТЬ', value: String(Math.round(p.runSpeed())), color: '#7dffb0' }
+    { label: tr('hud.damage'), value: String(p.effectiveDamage()), color: '#ffd166' },
+    { label: tr('hud.attackSpeed'), value: p.attackRate().toFixed(1) + tr('hud.attackRateSuffix'), color: '#6fd8ff' },
+    { label: tr('hud.speed'), value: String(Math.round(p.runSpeed())), color: '#7dffb0' }
   ];
 
   ctx.textAlign = 'center';
@@ -156,7 +156,7 @@ function drawBuffs(ctx, p) {
   ctx.textAlign = 'left';
   ctx.font = '700 9px "Trebuchet MS", sans-serif';
   ctx.fillStyle = UNIBUFF.color;
-  ctx.fillText('УНИБАФ', 64, y + 18);
+  ctx.fillText(unibuffName().toUpperCase(), 64, y + 18);
 
   ctx.font = '800 13px "Trebuchet MS", sans-serif';
   ctx.fillStyle = '#f4eeff';
@@ -191,7 +191,7 @@ function drawBuffs(ctx, p) {
     ctx.textAlign = 'center';
     ctx.font = '900 12px "Trebuchet MS", sans-serif';
     ctx.fillStyle = active ? chip.cfg.color : 'rgba(220,210,240,0.32)';
-    ctx.fillText(chip.cfg.letter, cx, cy + 4);
+    ctx.fillText(runeLetter(chip.cfg), cx, cy + 4);
 
     ctx.textAlign = 'left';
     ctx.font = '700 9px "Trebuchet MS", sans-serif';
@@ -240,7 +240,7 @@ function drawKills(ctx, game) {
   ctx.textAlign = 'center';
   ctx.font = '700 9px "Trebuchet MS", sans-serif';
   ctx.fillStyle = 'rgba(214,198,240,0.65)';
-  ctx.fillText('УБИТО МОНСТРОВ', GAME_W - 106, 39);
+  ctx.fillText(tr('hud.kills'), GAME_W - 106, 39);
   ctx.font = '900 22px "Trebuchet MS", sans-serif';
   ctx.fillStyle = '#ffd166';
   ctx.fillText(String(game.kills), GAME_W - 106, 66);
@@ -253,19 +253,22 @@ function drawDepth(ctx, game) {
   ctx.textAlign = 'center';
   ctx.font = '700 9px "Trebuchet MS", sans-serif';
   ctx.fillStyle = 'rgba(214,198,240,0.6)';
-  ctx.fillText('ГЛУБИНА ЛЕСА', GAME_W / 2, 26);
+  ctx.fillText(tr('hud.depth'), GAME_W / 2, 26);
 
   ctx.font = '900 24px "Trebuchet MS", sans-serif';
   ctx.fillStyle = '#f4eeff';
   ctx.shadowColor = 'rgba(255,79,139,0.5)';
   ctx.shadowBlur = 14;
-  ctx.fillText(meters + ' м', GAME_W / 2, 50);
+  ctx.fillText(formatMeters(meters), GAME_W / 2, 50);
   ctx.shadowBlur = 0;
 
   ctx.font = '600 10px "Trebuchet MS", sans-serif';
   ctx.fillStyle = 'rgba(255,209,102,0.8)';
   ctx.fillText(
-    'ЗОНА ' + (Math.floor(danger) + 1) + ' · ОПАСНОСТЬ ' + danger.toFixed(1),
+    tr('hud.zoneDanger', {
+      zone: Math.floor(danger) + 1,
+      danger: danger.toFixed(1)
+    }),
     GAME_W / 2,
     66
   );
@@ -294,11 +297,11 @@ function drawTalentPopup(ctx, game) {
   ctx.textAlign = 'center';
   ctx.font = '700 8px "Trebuchet MS", sans-serif';
   ctx.fillStyle = 'rgba(255,209,102,0.75)';
-  ctx.fillText('ТАЛАНТ ВЫБРАН', GAME_W / 2, y + 12);
+  ctx.fillText(tr('talent.chosen'), GAME_W / 2, y + 12);
 
   ctx.font = '800 14px "Trebuchet MS", sans-serif';
   ctx.fillStyle = '#ffe6a3';
-  ctx.fillText(popup.name, GAME_W / 2, y + 28);
+  ctx.fillText(talentName(popup.talent), GAME_W / 2, y + 28);
 
   ctx.restore();
 }
@@ -323,21 +326,26 @@ function drawWeaponCard(ctx, p) {
   ctx.textAlign = 'left';
   ctx.font = '800 14px "Trebuchet MS", sans-serif';
   ctx.fillStyle = '#f4eeff';
-  ctx.fillText(p.weapon.label.toUpperCase(), 118, y + 27);
+  ctx.fillText(weaponLabel(p.weapon).toUpperCase(), 118, y + 27);
 
   ctx.font = '600 10px "Trebuchet MS", sans-serif';
   ctx.fillStyle = 'rgba(197,182,225,0.72)';
   const rof = p.attackRate().toFixed(1);
-  ctx.fillText('УРОН ' + p.effectiveDamage() + ' · ' + rof + '/с · РАЗМАХ ' + Math.round(p.weapon.reach), 118, y + 45);
+  ctx.fillText(
+    tr('hud.dmg') + ' ' + p.effectiveDamage() +
+    ' · ' + rof + tr('hud.attackRateSuffix') +
+    ' · ' + tr('hud.reach') + ' ' + Math.round(p.weapon.reach),
+    118, y + 45
+  );
 
   ctx.fillStyle = 'rgba(255,209,102,0.85)';
   ctx.font = '700 10px "Trebuchet MS", sans-serif';
-  ctx.fillText('F — УДАР', 118, y + 62);
+  ctx.fillText(tr('hud.attack'), 118, y + 62);
 
   if (p.weapon.id === 'fist') {
     ctx.fillStyle = 'rgba(160,145,190,0.6)';
     ctx.textAlign = 'right';
-    ctx.fillText('ищи меч на E', 338, y + 62);
+    ctx.fillText(tr('hud.findSword'), 338, y + 62);
   }
 }
 

@@ -475,7 +475,7 @@ class Monster {
     ctx.fillStyle = 'rgba(236,222,255,0.82)';
     ctx.shadowColor = 'rgba(0,0,0,0.9)';
     ctx.shadowBlur = 4;
-    ctx.fillText(this.name, this.x, y - 5);
+    ctx.fillText(monsterName(this.type), this.x, y - 5);
     ctx.shadowBlur = 0;
 
     roundRectPath(ctx, x, y, w, 8, 4);

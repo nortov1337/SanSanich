@@ -109,7 +109,7 @@ body::before {
 .panel::before {
   content: "";
   position: absolute;
-  inset: -1px;
+  inset: 0;
   border-radius: 26px;
   padding: 1px;
   background: linear-gradient(140deg, rgba(255, 79, 139, 0.45), transparent 40%, transparent 60%, rgba(111, 240, 201, 0.3));
@@ -179,6 +179,10 @@ body::before {
   -webkit-text-fill-color: var(--mint);
   opacity: 0.9;
   text-shadow: 0 0 18px rgba(111, 240, 201, 0.35);
+}
+
+.title > span {
+  display: block;
 }
 
 .tagline {
@@ -303,17 +307,63 @@ kbd {
   letter-spacing: 1px;
 }
 
+/* ===== ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ===== */
+
+.lang-switch {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.lang-switch--compact {
+  margin-top: 12px;
+}
+
+.lang-switch button {
+  appearance: none;
+  cursor: pointer;
+  padding: 6px 13px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  transition: color 0.15s, background 0.15s, border-color 0.15s, transform 0.12s;
+}
+
+.lang-switch button:hover {
+  color: var(--text);
+  border-color: rgba(255, 209, 102, 0.45);
+}
+
+.lang-switch button:active {
+  transform: translateY(1px);
+}
+
+.lang-switch button.is-active {
+  color: #1a0d16;
+  background: linear-gradient(135deg, #ffd166, #ff8a5c 55%, #ff4f8b);
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(255, 79, 139, 0.25);
+}
+
 /* ===== ЭКРАНЫ СОСТОЯНИЙ ===== */
 
 .small-panel { width: min(470px, 100%); padding: 32px 32px 24px; }
 
 .screen-title {
   margin: 0 0 6px;
-  font-size: clamp(30px, 5vw, 44px);
-  letter-spacing: 6px;
+  font-size: clamp(26px, 4.5vw, 40px);
+  letter-spacing: 4px;
+  line-height: 1.15;
   font-weight: 900;
   color: #fff;
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  overflow-wrap: anywhere;
 }
 
 .screen-title--red {

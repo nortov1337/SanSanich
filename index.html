@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Сын Саныч — Путь Сани</title>
-  <meta name="description" content="Бесконечный 2D-платформер про кота, монстров, оружие, броню и руны." />
+  <title>Syn Sanych — Path of Sani</title>
+  <meta name="description" content="Syn Sanych — Path of Sani: an endless 2D platformer with meme monsters, weapons, runes and talents." />
+  <link rel="icon" id="favicon" href="data:," />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -14,80 +15,93 @@
 
   <div id="ui">
 
-    <!-- МЕНЮ -->
+    <!-- MENU -->
     <section class="overlay is-active" data-screen="menu">
       <div class="panel menu-panel">
         <div class="hero-badge">
-          <img id="hero-img" alt="Главный герой" />
+          <img id="hero-img" alt="Main hero" data-i18n-alt="menu.heroAlt" />
           <span class="hero-badge__ring"></span>
         </div>
 
-        <h1 class="title">СЫН&nbsp;САНЫЧ<small>ПУТЬ САНИ</small></h1>
-        <p class="tagline">Бесконечный забег. Чем дальше — тем страшнее.</p>
+        <h1 class="title"><span data-i18n="menu.title">SYN SANYCH</span><small data-i18n="menu.subtitle">PATH OF SANI</small></h1>
+        <p class="tagline" data-i18n="menu.tagline">An endless run. The further you go, the worse it gets.</p>
 
         <div class="keys">
-          <div class="key"><span><kbd>A</kbd><kbd>D</kbd></span><em>идти</em></div>
-          <div class="key"><kbd>SPACE</kbd><em>прыжок ×2</em></div>
-          <div class="key"><kbd>F</kbd><em>удар</em></div>
-          <div class="key"><kbd>E</kbd><em>оружие / руны</em></div>
+          <div class="key"><span><kbd>A</kbd><kbd>D</kbd></span><em data-i18n="menu.key.move">move</em></div>
+          <div class="key"><kbd>SPACE</kbd><em data-i18n="menu.key.jump">jump ×2</em></div>
+          <div class="key"><kbd>F</kbd><em data-i18n="menu.key.attack">attack</em></div>
+          <div class="key"><kbd>E</kbd><em data-i18n="menu.key.pickup">weapons / runes</em></div>
         </div>
 
-        <button id="btn-start" class="btn btn-primary" type="button">НАЧАТЬ ЗАБЕГ</button>
-        <p class="record">ЛУЧШИЙ ЗАБЕГ: <b id="menu-best">—</b></p>
+        <button id="btn-start" class="btn btn-primary" type="button" data-i18n="menu.start">START RUN</button>
+        <p class="record"><span data-i18n="menu.bestLabel">BEST RUN:</span> <b id="menu-best">—</b></p>
+
+        <div class="lang-switch" aria-label="Language">
+          <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="ru">RU</button>
+        </div>
       </div>
     </section>
 
-    <!-- ПАУЗА -->
+    <!-- PAUSE -->
     <section class="overlay" data-screen="pause">
       <div class="panel small-panel">
-        <h2 class="screen-title">ПАУЗА</h2>
-        <p class="screen-sub">Лес подождёт. Кот тоже.</p>
+        <h2 class="screen-title" data-i18n="pause.title">PAUSED</h2>
+        <p class="screen-sub" data-i18n="pause.sub">The forest can wait. So can the cat.</p>
         <div class="keys keys--compact">
-          <div class="key"><span><kbd>A</kbd><kbd>D</kbd></span><em>идти</em></div>
-          <div class="key"><kbd>SPACE</kbd><em>прыжок</em></div>
-          <div class="key"><kbd>F</kbd><em>удар</em></div>
-          <div class="key"><kbd>E</kbd><em>подобрать</em></div>
+          <div class="key"><span><kbd>A</kbd><kbd>D</kbd></span><em data-i18n="menu.key.move">move</em></div>
+          <div class="key"><kbd>SPACE</kbd><em data-i18n="pause.key.jump">jump</em></div>
+          <div class="key"><kbd>F</kbd><em data-i18n="menu.key.attack">attack</em></div>
+          <div class="key"><kbd>E</kbd><em data-i18n="pause.key.pickup">pick up</em></div>
         </div>
         <div class="btn-row">
-          <button id="btn-resume" class="btn btn-primary" type="button">ПРОДОЛЖИТЬ</button>
-          <button id="btn-restart-pause" class="btn btn-ghost" type="button">ЗАНОВО</button>
+          <button id="btn-resume" class="btn btn-primary" type="button" data-i18n="pause.resume">RESUME</button>
+          <button id="btn-restart-pause" class="btn btn-ghost" type="button" data-i18n="pause.restart">RESTART</button>
         </div>
-        <p class="tiny">ESC — продолжить · M — звук · R — заново</p>
+        <p class="tiny" data-i18n="pause.hint">ESC — resume · M — sound · R — restart</p>
+        <div class="lang-switch lang-switch--compact" aria-label="Language">
+          <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="ru">RU</button>
+        </div>
       </div>
     </section>
 
-    <!-- СМЕРТЬ -->
+    <!-- DEATH -->
     <section class="overlay" data-screen="death">
       <div class="panel small-panel panel--blood">
-        <h2 class="screen-title screen-title--red">КОТ ПАЛ</h2>
-        <p class="screen-sub">Но у него ещё есть восемь жизней. Наверное.</p>
+        <h2 class="screen-title screen-title--red" data-i18n="death.title">THE CAT HAS FALLEN</h2>
+        <p class="screen-sub" data-i18n="death.sub">But he still has eight lives. Probably.</p>
         <div class="stats">
-          <div class="stat"><span>Убито монстров</span><b id="death-kills">0</b></div>
-          <div class="stat"><span>Дистанция</span><b id="death-distance">0 м</b></div>
-          <div class="stat"><span>Рекорд</span><b id="death-best">—</b></div>
-          <div class="stat"><span>Время в пути</span><b id="death-time">0:00</b></div>
+          <div class="stat"><span data-i18n="death.kills">Monsters killed</span><b id="death-kills">0</b></div>
+          <div class="stat"><span data-i18n="death.distance">Distance</span><b id="death-distance">0 m</b></div>
+          <div class="stat"><span data-i18n="death.best">Best</span><b id="death-best">—</b></div>
+          <div class="stat"><span data-i18n="death.time">Time</span><b id="death-time">0:00</b></div>
         </div>
         <div class="btn-row">
-          <button id="btn-restart-death" class="btn btn-primary" type="button">ЕЩЁ РАЗ</button>
+          <button id="btn-restart-death" class="btn btn-primary" type="button" data-i18n="death.restart">TRY AGAIN</button>
         </div>
-        <p class="tiny">R — попробовать снова</p>
+        <p class="tiny" data-i18n="death.hint">R — try again</p>
       </div>
     </section>
 
-    <!-- ВЫБОР ТАЛАНТА -->
+    <!-- TALENT CHOICE -->
     <section class="overlay" data-screen="talent">
       <div class="panel talent-panel">
-        <h2 class="screen-title">ВЫБЕРИ ТАЛАНТ</h2>
-        <p class="screen-sub" id="talent-subtitle">Награда за 50 убийств. Выбор один раз за забег — второй талант больше не появится.</p>
+        <h2 class="screen-title" data-i18n="talent.title">CHOOSE A TALENT</h2>
+        <p class="screen-sub" id="talent-subtitle">Reward for 50 kills. One choice per run — the other talent will not appear again.</p>
         <div class="talent-options" id="talent-options"></div>
-        <p class="tiny">Талант действует до конца забега</p>
+        <p class="tiny" data-i18n="talent.note">The talent lasts until the end of the run</p>
       </div>
     </section>
 
-    <div class="corner-hint"><span id="mute-label">M — звук</span><span class="dot">·</span>ESC — пауза</div>
+    <div class="corner-hint">
+      <span id="mute-label" data-i18n="hint.mute">M — SOUND</span>
+      <span class="dot">·</span>
+      <span data-i18n="hint.pause">ESC — PAUSE</span>
+    </div>
   </div>
 
-  <!-- ЭКРАН ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ -->
+  <!-- PC ONLY GATE -->
   <div class="device-gate" id="device-gate">
     <div class="device-gate__panel">
       <svg class="device-gate__icon" viewBox="0 0 64 64" aria-hidden="true">
@@ -95,13 +109,13 @@
         <path d="M22 54h20M32 44v10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
         <path d="M13 18h38M13 25h22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.45" />
       </svg>
-      <h2>НУЖНО ЗАЙТИ С ПК</h2>
-      <p>Игра рассчитана на клавиатуру и мышь.</p>
-      <p class="device-gate__hint">Открой её на компьютере или ноутбуке</p>
+      <h2 data-i18n="gate.mobileTitle">PC REQUIRED</h2>
+      <p data-i18n="gate.mobileLine">This game is designed for a keyboard and mouse.</p>
+      <p class="device-gate__hint" data-i18n="gate.mobileHint">Open it on a desktop or laptop</p>
     </div>
   </div>
 
-  <!-- ЭКРАН ОШИБКИ ДАННЫХ -->
+  <!-- DATA ERROR GATE -->
   <div class="device-gate" id="data-gate">
     <div class="device-gate__panel">
       <svg class="device-gate__icon" viewBox="0 0 64 64" aria-hidden="true">
@@ -109,15 +123,16 @@
         <path d="M32 24v14" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
         <circle cx="32" cy="46" r="2.6" fill="currentColor" />
       </svg>
-      <h2>НЕТ ДОСТУПА К ДАННЫМ</h2>
-      <p>Не удалось прочитать <b>data/game-data.json</b>.</p>
-      <p class="device-gate__hint">Запусти start-game.bat или локальный сервер</p>
+      <h2 data-i18n="gate.dataTitle">DATA UNAVAILABLE</h2>
+      <p data-i18n="gate.dataLine">Could not read data/game-data.json.</p>
+      <p class="device-gate__hint" data-i18n="gate.dataHint">Run start-game.bat or a local server</p>
       <p class="tiny" id="data-error-detail"></p>
     </div>
   </div>
 
   <script src="js/core/config.js"></script>
   <script src="js/core/platform.js"></script>
+  <script src="js/core/i18n.js"></script>
   <script src="js/core/utils.js"></script>
   <script src="js/core/input.js"></script>
   <script src="js/core/audio.js"></script>

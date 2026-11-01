@@ -1,177 +1,189 @@
-# Сын Саныч — Путь Сани
+# Syn Sanych — Path of Sani
 
-Бесконечный 2D-платформер-слэшер про кота, монстров, оружие, руны и УниБаф.
-Чистый HTML + CSS + JavaScript (Canvas 2D), без сборки и зависимостей.
+An endless 2D platformer-slasher about a cat, meme monsters, weapons, runes and UniBuff.
+Pure HTML + CSS + JavaScript (Canvas 2D), no build step and no dependencies.
 
-## Как запустить
+**Play online:** <https://synsanych.nortov.win>
 
-1. Запустите `start-game.bat` — он поднимет локальный сервер и откроет игру в браузере.
-   Нужен **Node.js** (если его нет — скрипт попробует Python). Не закрывайте окно консоли во время игры — в нём работает сервер. Если браузер не открылся, скопируйте ссылку из консоли.
-2. Вручную:
+The game is in English by default, with a full Russian localization — switch languages with the **EN / RU** buttons on the menu or pause screen.
+
+## Running locally
+
+1. Run `start-game.bat` — it starts a local server and opens the game in your browser.
+   You need **Node.js** (if it is missing, the script falls back to Python). Keep the console window open while you play — the server lives there. If the browser did not open, copy the link from the console.
+2. Or start a server manually:
 
 ```bash
 node server.js
-# или
+# or
 python -m http.server 8080
 ```
 
-и откройте <http://localhost:8123> (или <http://localhost:8080>).
+then open <http://localhost:8123> (or <http://localhost:8080>).
 
-> Просто открыть `index.html` двойным кликом теперь нельзя: браузер не даёт читать `data/game-data.json` с `file://`. В этом случае игра покажет экран «НЕТ ДОСТУПА К ДАННЫМ» с подсказкой запустить `start-game.bat`.
+> Opening `index.html` by double-clicking no longer works: browsers block reading `data/game-data.json` over `file://`. In that case the game shows a **"DATA UNAVAILABLE"** screen with a hint to run `start-game.bat`.
 
-## Данные игры
+## Game data
 
-Все редактируемые данные лежат в одном файле — **`data/game-data.json`**:
+All editable data lives in a single file — **`data/game-data.json`**:
 
-- `player` — здоровье, скорость бега, прыжок, гравитация, лимиты;
-- `unibuff` — сколько даёт УниБаф;
-- `runes` — «Ред», «Дельта», «Зетель» и их эффекты;
-- `talents` — таланты и их эффекты;
-- `weapons` — всё оружие;
-- `monsters` — все монстры: HP, урон, скорость, размеры, цвета, картинки;
-- `spawning` — какие монстры и оружие появляются на какой глубине (`minPower` / `minDepth`). Ветеран Всевеликих добавлен в пул с `minDepth: 1000`;
-- `world` — ширина чанка, высота земли, рост статов от глубины, скорость преследования монстров, лечение сердец, порог талантов, волны.
-- `heroImage` — путь к фото главного героя.
+- `player` — health, run speed, jump, gravity, limits;
+- `unibuff` — how much UniBuff gives;
+- `runes` — "Red", "Delta", "Zetel" and their effects;
+- `talents` — talents and their effects;
+- `weapons` — every weapon;
+- `monsters` — every monster: HP, damage, speed, size, colors, images;
+- `spawning` — which monsters and weapons appear at which depth (`minPower` / `minDepth`). Veteran of All Greats is added to the pool with `minDepth: 1000`;
+- `world` — chunk width, ground height, stat growth with depth, monster chase speed, heart healing, talent threshold, waves;
+- `heroImage` — path to the hero photo.
 
-Меняете JSON → перезагружаете страницу. При синтаксической ошибке или нехватке разделов игра покажет экран с текстом ошибки.
+Edit the JSON → reload the page. On a syntax error or a missing section the game shows an error screen.
 
-## Только для ПК
+Text fields are localized with `name` / `nameRu`, `description` / `descriptionRu`, `letter` / `letterRu`, `hint` / `hintRu` — English first, Russian in the `*Ru` keys.
 
-Игра рассчитана на клавиатуру и мышь. Если открыть её на телефоне или планшете, вместо игры появится экран **«НУЖНО ЗАЙТИ С ПК»** — запуск в этом случае блокируется.
+## PC only
 
-## Управление
+The game is designed for a keyboard and mouse. If you open it on a phone or tablet, an **"PC REQUIRED"** screen appears instead of the game, and the run is blocked.
 
-| Клавиша | Действие |
+## Controls
+
+| Key | Action |
 | --- | --- |
-| `A` / `D` или `←` / `→` | идти |
-| `Space` / `W` / `↑` | прыжок (можно второй раз в воздухе) |
-| `F` | удар |
-| `E` | подобрать оружие или руну |
-| `Esc` / `P` | пауза |
-| `M` | звук вкл/выкл |
-| `R` | заново (на экране смерти или паузы) |
+| `A` / `D` or `←` / `→` | move |
+| `Space` / `W` / `↑` | jump (a second jump is allowed in the air) |
+| `F` | attack |
+| `E` | pick up a weapon or rune |
+| `Esc` / `P` | pause |
+| `M` | sound on/off |
+| `R` | restart (on the death or pause screen) |
 
-## Атрибуты в HUD
+## HUD stats
 
-Слева сверху всегда видно:
+Always visible in the top-left corner:
 
-- **УРОН** — урон текущего оружия с учётом всех бонусов;
-- **СКОР. АТАКИ** — сколько ударов в секунду делает кот;
-- **СКОРОСТЬ** — скорость перемещения;
-- **УНИБАФ** — количество собранных бафов;
-- **Р / Д / З** — количество рун «Ред», «Дельта», «Зетель».
+- **DAMAGE** — damage of the current weapon with all bonuses;
+- **ATTACK SPEED** — hits per second;
+- **SPEED** — movement speed;
+- **UNIBUFF** — number of buffs collected;
+- **R / D / Z** — number of "Red", "Delta", "Zetel" runes.
 
-Здоровье, глубина в метрах, зона/опасность, счётчик убийств и текущее оружие тоже на экране.
+Health, depth in meters, zone/danger, the kill counter and the current weapon are on screen too.
 
-## Таланты
+## Talents
 
-За **50 убийств** игра один раз предлагает выбрать один талант из двух случайных (сейчас в JSON всего два, поэтому показываются оба):
+At **50 kills** the game once offers a choice of one talent out of two random ones (there are only two in the JSON right now, so both are shown):
 
-| Талант | Эффект |
+| Talent | Effect |
 | --- | --- |
-| **Жажда крови** | Восстанавливать 5 HP при убийстве монстра |
-| **Поток силы** | +10 УниБафов за каждые 10 убийств |
+| **Bloodthirst** | Restore 5 HP when you kill a monster |
+| **Power Flow** | Gain 10 UniBuffs every 10 kills |
 
-- Талант выбирается **один раз за забег**. После выбора второй талант и новые предложения больше не появляются.
-- Награда выдаётся на 50-м убийстве; если добавить в JSON больше талантов, из них будут случайно предлагаться два.
-- Выбранный талант сбрасывается при смерти/рестарте.
-- Порог, количество вариантов и сами таланты настраиваются в `data/game-data.json`.
+- A talent is chosen **once per run**. After the pick, no second talent and no further offers appear.
+- The reward is granted at the 50th kill; add more talents to the JSON and two of them will be offered at random.
+- The chosen talent resets on death/restart.
+- The threshold, the number of options and the talents themselves are configured in `data/game-data.json`.
 
-## УниБаф
+## UniBuff
 
-**С каждого убитого монстра падает УниБаф** — светящаяся разноцветная звезда. Подбирается автоматически: притягивается к коту.
+**Every killed monster drops a UniBuff** — a glowing multicolored star. It is picked up automatically: it flies toward the cat.
 
-Один УниБаф даёт сразу всё:
+One UniBuff gives everything at once:
 
-- +4% урона;
-- +3% скорости атаки;
-- +3% скорости бега;
-- +2 к максимуму здоровья (и лечит на 2).
+- +4% damage;
+- +3% attack speed;
+- +3% run speed;
+- +2 max health (and heals for 2).
 
-Броня из игры убрана — защиту теперь дают здоровье, мобильность и скорость убийства.
+Armor has been removed from the game — survivability now comes from health, mobility and kill speed.
 
-## Руны
+## Runes
 
-Руны лежат на карте и подбираются на `E`. Каждая стакается до конца забега:
+Runes lie around the map and are picked up with `E`. Each one stacks until the end of the run:
 
-| Руна | Буква | Эффект |
+| Rune | Letter | Effect |
 | --- | --- | --- |
-| **Ред** | Р | +7% скорости перемещения за каждую (общий кап ×2.5) |
-| **Дельта** | Д | +12% скорости атаки за каждую |
-| **Зетель** | З | двойной урон; каждая следующая добавляет ещё +100% |
+| **Red** | R | +7% movement speed each (overall cap ×2.5) |
+| **Delta** | D | +12% attack speed each |
+| **Zetel** | Z | double damage; every next one adds another +100% |
 
-## Оружие
+## Weapons
 
-Начинаете с **Кулаком**. По пути попадаются мечи и клинки — подбираются на `E`.
-Если взять новое оружие, старое падает на землю, его можно вернуть.
+You start with a **Fist**. Swords and blades lie along the way — pick them up with `E`.
+Taking a new weapon drops the old one on the ground, so you can take it back.
 
-Типы: Ржавый тесак, Клинок Надежды, Катана Уцы, Секира Огроса, Меч Героя.
-Сила оружия растёт с глубиной: предметы выпадают с уровнями (`+N`), увеличивающими урон и размах.
+Types: Rusty Cleaver, Blade of Hope, Utsy's Katana, Ogros's Axe, Hero's Sword.
+Weapon power grows with depth: items drop with levels (`+N`) that increase damage and reach.
 
-## Бесконечный лес
+## The endless forest
 
-- Мир генерируется процедурно чанками по 1500 px и никогда не заканчивается.
-- Чем дальше кот уходит и чем дольше идёт забег, тем выше опасность: у монстров растут HP, урон и скорость, а врагов становится больше.
-- Каждые несколько секунд с края экрана приходит волна монстров.
-- Монстры не дают просто пробежать мимо: при погоне они разгоняются вслед за котом, получают дополнительную скорость, если сильно отстали, и делают рывок во время замаха, доставая бегущего кота. Агро больше не сбрасывается по дистанции, поэтому оторваться бегом не получится.
-- Монстры патрулируют, преследуют кота, прыгают на платформы и через ямы.
-- Финального босса нет: цель — пройти как можно дальше. Рекорд сохраняется в браузере.
+- The world is generated procedurally in 1500 px chunks and never ends.
+- The further the cat goes and the longer the run lasts, the higher the danger: monsters gain HP, damage and speed, and there are more of them.
+- Every few seconds a wave of monsters arrives from the edge of the screen.
+- You cannot simply run past monsters: while chasing they accelerate after the cat, get extra speed when they fall behind, and lunge during their wind-up to reach a running cat. Aggro is no longer dropped by distance, so outrunning them will not work.
+- Monsters patrol, chase the cat, and jump onto platforms and across pits.
+- There is no final boss: the goal is to get as far as possible. The record is saved in the browser.
 
-## Монстры
+## Monsters
 
-Из папки `Reference/monsters`, имена строго по файлам:
+From the `Reference/monsters` folder, names strictly by file:
 
-- **УцыУфЭ** — быстрый и назойливый;
-- **Пещерос** — крепкий середняк;
-- **Undefined** — очень шустрый;
-- **Уцеплясцжирэ** — тяжелее и больнее;
-- **Ебалоклюв** — крупный боец;
-- **Огрос Нарепос** — мини-танк поздних зон;
-- **Ветеран Всевеликих** — элитный танк в короне, появляется на глубине **от 1000 м**.
+- **UtsyUfe** — fast and annoying;
+- **Peshcheros** — a sturdy all-rounder;
+- **Undefined** — very quick;
+- **Utseplyastszhire** — heavier and hits harder;
+- **Ebalokluv** — a big brawler;
+- **Ogros Narepos** — late-zone mini-tank;
+- **Veteran of All Greats** — elite crowned tank that appears from **1000 m** deep.
 
-## Структура кода
+## Code structure
 
-Код разбит на небольшие модули. Все игровые данные — в JSON, код — только логика.
+The code is split into small modules. All game data is in JSON; the code is logic only.
 
 ```
 index.html
 css/style.css
-data/game-data.json    ← монстры, оружие, руны, таланты, баланс
-server.js              локальный сервер (нужен для загрузки JSON)
+data/game-data.json    ← monsters, weapons, runes, talents, balance
+server.js              local server (needed to load the JSON)
+start-game.bat         Windows launcher (Node → Python fallback)
 js/
   core/
-    config.js          базовые константы
-    platform.js        проверка «ПК / телефон / планшет»
-    data-loader.js     загрузка и применение game-data.json
-    utils.js           математика и общие рисовалки
-    input.js           клавиатура
-    audio.js           синтезированные звуки
-    assets.js          загрузка фото
+    config.js          base constants
+    platform.js        PC / phone / tablet detection
+    i18n.js            EN/RU localization layer
+    data-loader.js     loads and applies game-data.json
+    utils.js           math and shared drawing helpers
+    input.js           keyboard
+    audio.js           synthesized sounds
+    assets.js          image loading
   data/
-    weapons.js         принимает оружие из JSON + расчёт уровня
-    monsters.js        принимает монстров из JSON
-    runes.js           принимает руны и УниБаф из JSON
-    talents.js         принимает таланты из JSON
+    weapons.js         accepts weapons from JSON + level math
+    monsters.js        accepts monsters from JSON
+    runes.js           accepts runes and UniBuff from JSON
+    talents.js         accepts talents from JSON
   world/
-    generator.js       процедурная генерация чанков
-    world.js           поток мира и коллизии
+    generator.js       procedural chunk generation
+    world.js           world streaming and collisions
   entities/
-    player.js          кот и его атрибуты
-    monster.js         ИИ и физика монстров
-    pickups.js         оружие, руны, УниБаф, сердца
-    effects.js         частицы и всплывающий текст
+    player.js          the cat and its stats
+    monster.js         monster AI and physics
+    pickups.js         weapons, runes, UniBuff, hearts
+    effects.js         particles and floating text
   render/
-    background.js      небо, луна, параллакс
-    world.js           земля, платформы, декор
-    hud.js             HUD и виньетка
-    weapon-art.js      векторная отрисовка оружия
-  game.js              состояние забега, волны, таланты
-  main.js              загрузка JSON и ассетов, запуск
+    background.js      sky, moon, parallax
+    world.js           ground, platforms, decor
+    hud.js             HUD and vignette
+    weapon-art.js      vector weapon drawing
+  game.js              run state, waves, talents
+  main.js              JSON and asset loading, boot
 ```
 
-Скрипты подключаются обычными `<script>` в строгом порядке. JSON читается через `fetch`, поэтому игре нужен локальный сервер (его поднимает `start-game.bat`). React не понадобился: вся графика в Canvas, интерфейс — лёгкий DOM/CSS.
+Scripts are loaded with plain `<script>` tags in a strict order. The JSON is read via `fetch`, so the game needs a local server (started by `start-game.bat`). React was not needed: all graphics are Canvas, the interface is light DOM/CSS.
 
-## Параметры для отладки
+## Debug parameters
 
-- `http://localhost:8123/index.html?play=1` — сразу начать забег.
-- `http://localhost:8123/index.html?play=1&x=12000` — стартовать на глубине 12000 px.
+- `http://localhost:8123/index.html?play=1` — start a run immediately.
+- `http://localhost:8123/index.html?play=1&x=12000` — start at 12000 px depth (25 px = 1 m).
+
+## License
+
+Free to use, modify and share.

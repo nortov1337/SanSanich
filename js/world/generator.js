@@ -225,8 +225,8 @@ function generateChunk(index, worldSeed) {
 
   const signs = [];
   if (isIntro) {
-    signs.push({ x: 340, lines: ['A / D — ИДТИ', 'SPACE — ПРЫЖОК ×2'] });
-    signs.push({ x: 1050, lines: ['F — УДАР', 'E — ПОДОБРАТЬ'] });
+    signs.push({ x: 340, lines: ['sign.move', 'sign.jump'] });
+    signs.push({ x: 1050, lines: ['sign.hit', 'sign.pickup'] });
   }
 
   return {

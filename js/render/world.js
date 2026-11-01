@@ -307,7 +307,8 @@ function drawSigns(ctx, camX) {
       ctx.textAlign = 'center';
       ctx.font = '700 11px "Trebuchet MS", sans-serif';
       sign.lines.forEach((line, i) => {
-        ctx.fillText(line, x, y - 108 + i * 16);
+        const text = line.indexOf('sign.') === 0 ? tr(line) : line;
+        ctx.fillText(text, x, y - 108 + i * 16);
       });
 
       ctx.fillStyle = 'rgba(255,255,255,0.1)';

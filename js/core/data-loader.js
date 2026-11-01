@@ -8,13 +8,13 @@ let DATA = null;
 
 async function loadGameData() {
   const response = await fetch('data/game-data.json', { cache: 'no-store' });
-  if (!response.ok) throw new Error('HTTP ' + response.status + ' при загрузке data/game-data.json');
+  if (!response.ok) throw new Error('HTTP ' + response.status + ' while loading data/game-data.json');
   return response.json();
 }
 
 function applyGameData(data) {
   if (!data || !data.weapons || !data.monsters || !data.runes || !data.unibuff || !data.talents) {
-    throw new Error('В game-data.json не хватает обязательных разделов: weapons, monsters, runes, unibuff, talents');
+    throw new Error('game-data.json is missing required sections: weapons, monsters, runes, unibuff, talents');
   }
 
   DATA = data;

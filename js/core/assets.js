@@ -39,7 +39,7 @@ function loadAssets(onProgress) {
     };
     img.onload = done;
     img.onerror = () => {
-      console.warn('Не удалось загрузить изображение:', path);
+      console.warn('Failed to load image:', path);
       done();
     };
     img.src = encodeURI(path);

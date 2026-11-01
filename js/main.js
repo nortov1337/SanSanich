@@ -5,7 +5,7 @@
    ========================================================= */
 
 function showDataError(error) {
-  console.error('Не удалось загрузить данные игры:', error);
+  console.error('Failed to load game data:', error);
   document.body.classList.add('data-error');
 
   const detail = document.getElementById('data-error-detail');
@@ -22,7 +22,7 @@ function showDataError(error) {
 
   if (startBtn) {
     startBtn.disabled = true;
-    startBtn.textContent = 'ЗАГРУЗКА ДАННЫХ…';
+    startBtn.textContent = tr('menu.loadingData');
   }
 
   (async () => {
@@ -43,20 +43,23 @@ function showDataError(error) {
       return;
     }
 
-    if (startBtn) startBtn.textContent = 'ЗАГРУЗКА 0%';
+    if (startBtn) startBtn.textContent = tr('menu.loading', { p: 0 });
+
+    const favicon = document.getElementById('favicon');
+    if (favicon && ASSET_PATHS.hero) favicon.href = encodeURI(ASSET_PATHS.hero);
 
     const heroImg = document.getElementById('hero-img');
     if (heroImg && ASSET_PATHS.hero) heroImg.src = encodeURI(ASSET_PATHS.hero);
 
     loadAssets((progress) => {
-      if (startBtn) startBtn.textContent = 'ЗАГРУЗКА ' + Math.round(progress * 100) + '%';
+      if (startBtn) startBtn.textContent = tr('menu.loading', { p: Math.round(progress * 100) });
     }).then(() => {
       game.assetsReady = true;
       game.resetWorld();
 
       if (startBtn) {
         startBtn.disabled = false;
-        startBtn.textContent = 'НАЧАТЬ ЗАБЕГ';
+        startBtn.textContent = tr('menu.start');
       }
 
       const params = new URLSearchParams(window.location.search);

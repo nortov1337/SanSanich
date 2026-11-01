@@ -70,13 +70,14 @@ class WeaponPickup {
     ctx.font = '700 11px "Trebuchet MS", sans-serif';
     ctx.lineWidth = 3;
     ctx.strokeStyle = 'rgba(8,5,14,0.85)';
-    ctx.strokeText(this.wpn.label, this.x, this.baseY + 34);
+    const wpnLabel = weaponLabel(this.wpn);
+    ctx.strokeText(wpnLabel, this.x, this.baseY + 34);
     ctx.fillStyle = 'rgba(240,232,255,0.85)';
-    ctx.fillText(this.wpn.label, this.x, this.baseY + 34);
+    ctx.fillText(wpnLabel, this.x, this.baseY + 34);
     ctx.restore();
 
     if (game.player.nearPickup === this) {
-      drawPickupPrompt(ctx, this.x, bob - 40, 'ПОДОБРАТЬ');
+      drawPickupPrompt(ctx, this.x, bob - 40, tr('prompt.pickup'));
     }
   }
 }
@@ -141,7 +142,7 @@ class RunePickup {
     ctx.textAlign = 'center';
     ctx.font = '900 20px "Trebuchet MS", sans-serif';
     ctx.fillStyle = color;
-    ctx.fillText(this.rune.letter, 0, 7);
+    ctx.fillText(runeLetter(this.rune), 0, 7);
     ctx.restore();
 
     ctx.save();
@@ -149,18 +150,19 @@ class RunePickup {
     ctx.font = '700 11px "Trebuchet MS", sans-serif';
     ctx.lineWidth = 3;
     ctx.strokeStyle = 'rgba(8,5,14,0.85)';
-    const runeTitle = 'РУНА «' + this.rune.name + '»';
+    const runeTitle = tr('pickup.runeTitle', { name: runeName(this.rune) });
     ctx.strokeText(runeTitle, this.x, this.baseY + 34);
     ctx.fillStyle = color;
     ctx.fillText(runeTitle, this.x, this.baseY + 34);
     ctx.font = '600 9px "Trebuchet MS", sans-serif';
-    ctx.strokeText(this.rune.hint, this.x, this.baseY + 47);
+    const hint = runeHint(this.rune);
+    ctx.strokeText(hint, this.x, this.baseY + 47);
     ctx.fillStyle = 'rgba(230,220,250,0.72)';
-    ctx.fillText(this.rune.hint, this.x, this.baseY + 47);
+    ctx.fillText(hint, this.x, this.baseY + 47);
     ctx.restore();
 
     if (game.player.nearPickup === this) {
-      drawPickupPrompt(ctx, this.x, bob - 42, 'ВЗЯТЬ');
+      drawPickupPrompt(ctx, this.x, bob - 42, tr('prompt.take'));
     }
   }
 }
@@ -206,7 +208,7 @@ class UniBuffPickup {
 
     player.addUniBuffs(1);
 
-    game.addDamageText(this.x, this.y - 18, '+ УНИБАФ', UNIBUFF.color, 1.05);
+    game.addDamageText(this.x, this.y - 18, tr('pickup.unibuffGain'), UNIBUFF.color, 1.05);
     game.spawnBurst(this.x, this.y, UNIBUFF.color, 20);
     Sfx.pickup();
   }

@@ -11,7 +11,8 @@
   },
 
   "unibuff": {
-    "name": "УниБаф",
+    "name": "UniBuff",
+    "nameRu": "УниБаф",
     "color": "#c9a7ff",
     "damage": 0.04,
     "attackSpeed": 0.03,
@@ -21,40 +22,53 @@
 
   "runes": {
     "red": {
-      "name": "Ред",
-      "letter": "Р",
+      "name": "Red",
+      "nameRu": "Ред",
+      "letter": "R",
+      "letterRu": "Р",
       "color": "#ff5f7a",
-      "hint": "скорость перемещения",
+      "hint": "movement speed",
+      "hintRu": "скорость перемещения",
       "moveBonus": 0.07
     },
     "delta": {
-      "name": "Дельта",
-      "letter": "Д",
+      "name": "Delta",
+      "nameRu": "Дельта",
+      "letter": "D",
+      "letterRu": "Д",
       "color": "#6fd8ff",
-      "hint": "скорость атаки",
+      "hint": "attack speed",
+      "hintRu": "скорость атаки",
       "attackSpeedBonus": 0.12
     },
     "zetel": {
-      "name": "Зетель",
-      "letter": "З",
+      "name": "Zetel",
+      "nameRu": "Зетель",
+      "letter": "Z",
+      "letterRu": "З",
       "color": "#ffd166",
-      "hint": "двойной урон",
+      "hint": "double damage",
+      "hintRu": "двойной урон",
       "damageBonus": 1.0
     }
   },
 
   "talents": {
     "heal_on_kill": {
-      "name": "Жажда крови",
+      "name": "Bloodthirst",
+      "nameRu": "Жажда крови",
       "icon": "❤",
-      "description": "Восстанавливать 5 HP при убийстве монстра",
+      "description": "Restore 5 HP when you kill a monster",
+      "descriptionRu": "Восстанавливать 5 HP при убийстве монстра",
       "effect": "healOnKill",
       "value": 5
     },
     "unibuff_per_ten": {
-      "name": "Поток силы",
+      "name": "Power Flow",
+      "nameRu": "Поток силы",
       "icon": "★",
-      "description": "+10 УниБафов за каждые 10 убийств",
+      "description": "Gain 10 UniBuffs every 10 kills",
+      "descriptionRu": "+10 УниБафов за каждые 10 убийств",
       "effect": "unibuffEveryKills",
       "kills": 10,
       "amount": 10
@@ -64,8 +78,10 @@
   "weapons": {
     "fist": {
       "id": "fist",
-      "name": "Кулак",
-      "tag": "то, с чего все начинают",
+      "name": "Fist",
+      "nameRu": "Кулак",
+      "tag": "where it all starts",
+      "tagRu": "то, с чего все начинают",
       "dmg": 10,
       "reach": 44,
       "cd": 0.3,
@@ -76,8 +92,10 @@
     },
     "rusty": {
       "id": "rusty",
-      "name": "Ржавый тесак",
-      "tag": "нашёл в кустах. пахнет историей",
+      "name": "Rusty Cleaver",
+      "nameRu": "Ржавый тесак",
+      "tag": "found in a bush. smells like history",
+      "tagRu": "нашёл в кустах. пахнет историей",
       "dmg": 17,
       "reach": 54,
       "cd": 0.36,
@@ -88,8 +106,10 @@
     },
     "blade": {
       "id": "blade",
-      "name": "Клинок Надежды",
-      "tag": "лёгкий, звонкий, почти новый",
+      "name": "Blade of Hope",
+      "nameRu": "Клинок Надежды",
+      "tag": "light, ringing, almost new",
+      "tagRu": "лёгкий, звонкий, почти новый",
       "dmg": 25,
       "reach": 60,
       "cd": 0.4,
@@ -100,8 +120,10 @@
     },
     "katana": {
       "id": "katana",
-      "name": "Катана Уцы",
-      "tag": "розовая. очень розовая",
+      "name": "Utsy's Katana",
+      "nameRu": "Катана Уцы",
+      "tag": "pink. very pink",
+      "tagRu": "розовая. очень розовая",
       "dmg": 34,
       "reach": 66,
       "cd": 0.32,
@@ -112,8 +134,10 @@
     },
     "axe": {
       "id": "axe",
-      "name": "Секира Огроса",
-      "tag": "тяжёлая, зелёная, злая",
+      "name": "Ogros's Axe",
+      "nameRu": "Секира Огроса",
+      "tag": "heavy, green, angry",
+      "tagRu": "тяжёлая, зелёная, злая",
       "dmg": 48,
       "reach": 72,
       "cd": 0.55,
@@ -124,8 +148,10 @@
     },
     "hero": {
       "id": "hero",
-      "name": "Меч Героя",
-      "tag": "светится. значит, можно",
+      "name": "Hero's Sword",
+      "nameRu": "Меч Героя",
+      "tag": "it glows. so it must work",
+      "tagRu": "светится. значит, можно",
       "dmg": 62,
       "reach": 80,
       "cd": 0.44,
@@ -138,7 +164,8 @@
 
   "monsters": {
     "kiss": {
-      "name": "УцыУфЭ",
+      "name": "UtsyUfe",
+      "nameRu": "УцыУфЭ",
       "img": "kiss",
       "image": "Reference/monsters/УцыУфЭ.jpg",
       "hp": 26,
@@ -156,7 +183,8 @@
       "accent": "#ffb3d0"
     },
     "pescheros": {
-      "name": "Пещерос",
+      "name": "Peshcheros",
+      "nameRu": "Пещерос",
       "img": "pescheros",
       "image": "Reference/monsters/Пещерос.jpg",
       "hp": 50,
@@ -175,6 +203,7 @@
     },
     "undefined": {
       "name": "Undefined",
+      "nameRu": "Undefined",
       "img": "undefined",
       "image": "Reference/monsters/Undefined.png",
       "hp": 66,
@@ -192,7 +221,8 @@
       "accent": "#a9c9e0"
     },
     "ucept": {
-      "name": "Уцеплясцжирэ",
+      "name": "Utseplyastszhire",
+      "nameRu": "Уцеплясцжирэ",
       "img": "ucept",
       "image": "Reference/monsters/Уцеплясцжирэ.jpg",
       "hp": 78,
@@ -210,7 +240,8 @@
       "accent": "#8ff0cf"
     },
     "ebalokluv": {
-      "name": "Ебалоклюв",
+      "name": "Ebalokluv",
+      "nameRu": "Ебалоклюв",
       "img": "ebalokluv",
       "image": "Reference/monsters/Ебалоклюв.jpg",
       "hp": 100,
@@ -228,7 +259,8 @@
       "accent": "#ffa3d8"
     },
     "ogros": {
-      "name": "Огрос Нарепос",
+      "name": "Ogros Narepos",
+      "nameRu": "Огрос Нарепос",
       "img": "ogros",
       "image": "Reference/monsters/Огрос Нарепос.jpg",
       "hp": 180,
@@ -246,7 +278,8 @@
       "accent": "#c9f08a"
     },
     "veteran": {
-      "name": "Ветеран Всевеликих",
+      "name": "Veteran of All Greats",
+      "nameRu": "Ветеран Всевеликих",
       "img": "veteran",
       "image": "Reference/monsters/Ветеран Всевеликих.png",
       "crown": true,

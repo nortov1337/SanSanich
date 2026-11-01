@@ -50,6 +50,14 @@ class Game {
     this.fit();
     this.updateBestLabel();
     window.addEventListener('resize', () => this.fit());
+    window.addEventListener('languagechange', () => {
+      this.updateBestLabel();
+      this.updateMuteLabel();
+      if (this.state === 'talent') {
+        this.updateTalentSubtitle();
+        this.renderTalentChoices();
+      }
+    });
     requestAnimationFrame(this.loop);
   }
 
@@ -73,7 +81,7 @@ class Game {
   updateBestLabel() {
     const el = document.getElementById('menu-best');
     if (!el) return;
-    el.textContent = this.bestDistance > 0 ? this.bestDistance + ' м' : '—';
+    el.textContent = this.bestDistance > 0 ? formatMeters(this.bestDistance) : '—';
   }
 
   /* ---------- подготовка ---------- */
@@ -231,8 +239,8 @@ class Game {
     this.updateBestLabel();
 
     document.getElementById('death-kills').textContent = String(this.kills);
-    document.getElementById('death-distance').textContent = dist + ' м';
-    document.getElementById('death-best').textContent = this.bestDistance + ' м';
+    document.getElementById('death-distance').textContent = formatMeters(dist);
+    document.getElementById('death-best').textContent = formatMeters(this.bestDistance);
     document.getElementById('death-time').textContent = formatTime(this.runTime);
   }
 
@@ -262,11 +270,16 @@ class Game {
     this.input.endFrame();
   }
 
+  updateMuteLabel() {
+    const label = document.getElementById('mute-label');
+    if (!label) return;
+    label.textContent = Sfx.muted ? tr('hint.muted') : tr('hint.mute');
+  }
+
   handleGlobalInput() {
     if (this.input.pressed('mute')) {
-      const muted = Sfx.toggleMute();
-      const label = document.getElementById('mute-label');
-      if (label) label.textContent = muted ? 'M — звук выкл' : 'M — звук';
+      Sfx.toggleMute();
+      this.updateMuteLabel();
     }
 
     if (this.state === 'menu') {
@@ -380,7 +393,13 @@ class Game {
       if (this.kills % every === 0) {
         const amount = talent.amount || 10;
         this.player.addUniBuffs(amount);
-        this.addDamageText(this.player.cx(), this.player.y - 6, '+' + amount + ' УНИБАФ', UNIBUFF.color, 1.15);
+        this.addDamageText(
+          this.player.cx(),
+          this.player.y - 6,
+          tr('hud.unibuffGain', { n: amount }),
+          UNIBUFF.color,
+          1.15
+        );
         this.spawnBurst(this.player.cx(), this.player.y + this.player.h * 0.4, UNIBUFF.color, 30);
         Sfx.pickup();
       }
@@ -406,13 +425,18 @@ class Game {
 
     const subtitle = document.getElementById('talent-subtitle');
     if (subtitle) {
-      subtitle.textContent = 'Награда за ' + this.talentThreshold() +
-        ' убийств. Выбор один раз за забег — второй талант больше не появится.';
+      subtitle.textContent = tr('talent.subtitle', { n: this.talentThreshold() });
     }
 
     this.renderTalentChoices();
     this.showOverlay('talent');
     Sfx.click();
+  }
+
+  updateTalentSubtitle() {
+    const subtitle = document.getElementById('talent-subtitle');
+    if (!subtitle) return;
+    subtitle.textContent = tr('talent.subtitle', { n: this.talentThreshold() });
   }
 
   renderTalentChoices() {
@@ -430,15 +454,15 @@ class Game {
       icon.textContent = talent.icon || '★';
 
       const name = document.createElement('strong');
-      name.textContent = talent.name || 'Талант';
+      name.textContent = talentName(talent) || tr('talent.title');
 
       const description = document.createElement('span');
       description.className = 'talent-card__desc';
-      description.textContent = talent.description || '';
+      description.textContent = talentDescription(talent);
 
       const pick = document.createElement('span');
       pick.className = 'talent-card__pick';
-      pick.textContent = 'ВЫБРАТЬ';
+      pick.textContent = tr('talent.pick');
 
       card.appendChild(icon);
       card.appendChild(name);
@@ -457,7 +481,7 @@ class Game {
     this.state = 'playing';
     this.showOverlay(null);
 
-    this.talentPopup = { name: talent.name, time: 3.2 };
+    this.talentPopup = { talent, time: 3.2 };
     this.player.invuln = Math.max(this.player.invuln, 1.0);
     this.spawnBurst(this.player.cx(), this.player.y + this.player.h * 0.4, '#ffd166', 26);
     Sfx.pickup();
@@ -580,7 +604,7 @@ class Game {
         this.weaponPickups.push(new WeaponPickup(oldWeapon, dropX, p.y + p.h - 36));
       }
 
-      this.addDamageText(pickup.x, pickup.y - 34, pickup.wpn.label, pickup.wpn.color, 0.95);
+      this.addDamageText(pickup.x, pickup.y - 34, weaponLabel(pickup.wpn), pickup.wpn.color, 0.95);
       this.spawnBurst(pickup.x, pickup.y, pickup.wpn.color, 22);
       Sfx.pickup();
     } else if (pickup.kind === 'rune') {
@@ -589,7 +613,7 @@ class Game {
       this.addDamageText(
         pickup.x,
         pickup.y - 40,
-        'РУНА «' + pickup.rune.name + '»',
+        tr('hud.runeGain', { name: runeName(pickup.rune) }),
         pickup.rune.color,
         1.05
       );
